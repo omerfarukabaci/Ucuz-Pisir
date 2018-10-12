@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home_page():
-    return "Testing the heroku auto deploy..."
+    return "Testing222..."
 
 
 if __name__ == "__main__":
