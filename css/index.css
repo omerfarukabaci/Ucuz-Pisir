@@ -4,8 +4,8 @@ body {
 
 .main {
     display: grid;
+    grid-template-rows: repeat(3, auto);
     grid-template-columns: auto auto auto auto;
-    grid-auto-rows: auto;
     grid-column-gap: 30px;
     grid-row-gap: 15px;
     padding: 10px;
@@ -66,8 +66,12 @@ body {
 }
 
 .nav_bar {
+    width: 200px;
+    height: 300px;
+    background-color: whitesmoke;
+    z-index: 3;
     grid-row-start: 2;
-    grid-row-end: span 3;
+    grid-row-end: -1;
     -webkit-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.5);
@@ -81,7 +85,7 @@ body {
 ul {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 5px;
     overflow: hidden;
     display: list-item;
 }
