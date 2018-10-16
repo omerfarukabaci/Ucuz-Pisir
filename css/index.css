@@ -45,6 +45,10 @@ body {
 
 .recipe > .recipe_title {
     padding-bottom: 10px;
+    -webkit-user-select: none;      
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .nav_bar {
