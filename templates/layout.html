@@ -4,11 +4,8 @@
         <title>Ucuz Pişir</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="../css/index.css">
-        {% if title %}
-	        <title>Ucuzpisir - {{ title }}</title>
-	    {% else %}
-	        <title>Ucuzpisir</title>
-	    {% endif %}
+        {% if title %}<title>Ucuzpisir - {{ title }}</title>
+	    {% else %}<title>Ucuzpisir</title>{% endif %}
     </head>
 	<body>
         <div class = "main">
