@@ -2,7 +2,7 @@ body {
     background-color:white;
 }
 
-.main {
+.container {
     display: grid;
     grid-template-rows: repeat(3, auto);
     grid-template-columns: auto auto auto auto;
@@ -11,7 +11,7 @@ body {
     padding: 10px;
 }
 
-.main > .recipe {
+.container > .recipe {
     width: 300px;
     height: 200px;
     background-color: #e6e6e6;
@@ -24,7 +24,7 @@ body {
     overflow: hidden;
   }
 
-.main > .recipe:hover {
+.container > .recipe:hover {
     background-color: #e6e6e633;
     font-size: 35px;
     font-weight: bold;
