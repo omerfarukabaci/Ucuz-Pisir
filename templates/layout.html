@@ -7,8 +7,9 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='index.css')}}">
+        <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
         {% if title %}<title>Ucuzpisir - {{ title }}</title>
-	    {% else %}<title>Ucuzpisir</title>{% endif %}
+        {% else %}<title>Ucuzpisir</title>{% endif %}
     </head>
 	<body>
         <!--To Do: 
@@ -25,7 +26,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{{url_for('home')}}">Home</a>
+                    <a class="nav-item nav-link" href="{{url_for('home')}}">Ana Sayfa</a>
                     <a class="nav-item nav-link" href="{{url_for('home')}}">Tarifler</a>
                     <a class="nav-item nav-link" href="{{url_for('home')}}">Tarif Ara</a>
                     <a class="nav-item nav-link" href="{{url_for('about')}}">Hakkımızda</a>
