@@ -5,3 +5,6 @@ username validators:
 css grid video
     link:
         https://www.youtube.com/watch?v=hteylmxCUrY
+
+to do:
+    -change text from Turkish to English in the route "/login" and "/register", 
