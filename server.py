@@ -24,7 +24,8 @@ recipes = [
     {
         'title': 'Kung Pao Chicken',
         'image_path': '5.jpg'
-    },{
+    },
+    {
         'title': 'Beef Stroganoff',
         'image_path': '6.jpg'
     },

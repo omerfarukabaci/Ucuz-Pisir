@@ -1,0 +1,7 @@
+username validators:
+    -"data required, length" isnt length min2 guarantees data is entered?
+    -how to check if user entered space as character
+
+css grid video
+    link:
+        https://www.youtube.com/watch?v=hteylmxCUrY
