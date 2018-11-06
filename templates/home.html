@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+	<div class="row">
     {% for recipe in content %}
         	<div class = "col-sm-12 col-md-6 col-lg-4 " width = "200px">
 				<div class = "card">          		
@@ -10,5 +11,6 @@
 						src= {{url_for('static', filename="imgs/"+recipe.image_path)}}>
 				</div>
         	</div>
-    {% endfor %}
+	{% endfor %}
+	</div>
 {% endblock content %}	
