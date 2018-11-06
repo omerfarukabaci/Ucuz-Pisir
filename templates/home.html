@@ -1,12 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
     {% for recipe in content %}
-        	<div class = "recipe">
-          		<div class = "recipe_title">{{ recipe.title }}</div>
-         	 	<img class ="recipe_img"
-          			height = "150px"
-            		alt="{{ recipe.title }}"
-            		src= {{url_for('static', filename="imgs/"+recipe.image_path)}}>
+        	<div class = "col-sm-12 col-md-6 col-lg-4 " width = "200px">
+				<div class = "card">          		
+					<div class = "card-title">{{ recipe.title }}</div>
+					<img class ="card-img-top"
+						height = "150px"
+						alt="{{ recipe.title }}"
+						src= {{url_for('static', filename="imgs/"+recipe.image_path)}}>
+				</div>
         	</div>
     {% endfor %}
 {% endblock content %}	
