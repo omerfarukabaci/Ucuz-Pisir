@@ -6,7 +6,7 @@
          	 <img class ="recipe_img"
           		height = "150px"
             	alt="{{ recipe.title }}"
-            	src="../imgs/{{ recipe.image_path }}">
+            	src= {{url_for('static', filename='imgs/1.jpg')}}>
         	</div>
     {% endfor %}
 {% endblock recipes %}	
