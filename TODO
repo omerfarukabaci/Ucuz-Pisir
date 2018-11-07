@@ -2,3 +2,6 @@ Html/Templates:
   ☐ change text from Turkish to English in the route "/login" and "/register". @started(18-11-07 17:17)
   ☐ Add footer: @started(18-11-07 17:17)
       ☐ Maybe move: about link from header to footer @started(18-11-07 17:17)
+
+Forms:
+  ☐ Fix SQLalchemy parts inside custom validations of register @started(18-11-07 23:07)
