@@ -11,4 +11,4 @@ venv/
 docs/build/
 
 dev.py
-properties.py
+db_conifg.py
