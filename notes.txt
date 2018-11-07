@@ -2,9 +2,11 @@ username validators:
     -"data required, length" isnt length min2 guarantees data is entered?
     -how to check if user entered space as character
 
-css grid video
-    link:
+links:
+    css grid video:
         https://www.youtube.com/watch?v=hteylmxCUrY
 
+    flask tutorial:
+        part4: https://www.youtube.com/watch?v=cYWiDiIUxQc&index=4&list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
 to do:
-    -change text from Turkish to English in the route "/login" and "/register", 
+    -change text from Turkish to English in the route "/login" and "/register".
