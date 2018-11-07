@@ -9,7 +9,7 @@ links:
     flask tutorial:
         part4: https://www.youtube.com/watch?v=cYWiDiIUxQc&index=4&list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
 
-part4 notes:-
+part4 notes:
     class user:
         id: int, prime key
         username: string20, unique, not nullable
@@ -28,3 +28,6 @@ part4 notes:-
             //do we have to use utc?
         content: text, nullabel= false;
         user_id: not nullabel, integer, foreignkey(/*??*/)
+
+part6 notes:
+    
