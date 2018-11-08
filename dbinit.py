@@ -5,7 +5,7 @@ import psycopg2 as dbapi2
 
 
 INIT_STATEMENTS = [
-    """CREATE TABLE user(
+    """CREATE TABLE USER(
         ID SERIAL PRIMARY KEY,
         USERNAME VARCHAR(20) UNIQUE NOT NULL,
         PASSWORD VARCHAR(60) NOT NULL,
@@ -14,7 +14,7 @@ INIT_STATEMENTS = [
         BIRTHDATE DATE
     )
     """,
-    """CREATE TABLE recipe(
+    """CREATE TABLE RECIPE(
         ID SERIAL PRIMARY KEY,
         TITLE VARCHAR(80) NOT NULL,
         CONTENT TEXT NOT NULL,
