@@ -5,3 +5,6 @@ Html/Templates:
 
 Forms:
   ☐ Fix SQLalchemy parts inside custom validations of register @started(18-11-07 23:07)
+
+Useful Links:
+  ☐ https://devcenter.heroku.com/articles/heroku-postgresql#expensive-queries
