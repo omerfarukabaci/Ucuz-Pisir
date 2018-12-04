@@ -69,5 +69,30 @@ class Recipe(Base):
         ingridients = ingridients
         date_posted = date_posted
         recipe_img = recipe_img
+
     __repr__():
         return f"Post('{self.title}', '{self.date_posted}')"
+
+    def create(self):
+        statement = """
+        temp
+        """
+        self.execute(statement)
+    
+    def update(self):
+        statement = """
+        temp
+        """
+        self.execute(statement)
+    
+    def retrieve(self):
+        statement = """
+        temp
+        """
+        return self.execute(statement)
+    
+    def delete(self):
+        statement = """
+        temp
+        """
+        self.execute(statement)
