@@ -9,6 +9,9 @@ links:
     flask tutorial:
         part4: https://www.youtube.com/watch?v=cYWiDiIUxQc&index=4&list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
         https://github.com/CoreyMSchafer/code_snippets/tree/master/Python/Flask_Blog
+    
+    heroku cli commands:
+        https://devcenter.heroku.com/articles/heroku-postgresql#expensive-queries
 
 part4 notes:
     class post:

@@ -8,3 +8,6 @@ Forms:
 
 Useful Links:
   ☐ https://devcenter.heroku.com/articles/heroku-postgresql#expensive-queries
+
+Gitignore:
+  ☐ Check if docs/build ignore correct. @started(18-12-04 20:07)
