@@ -2,6 +2,7 @@ import psycopg2 as dbapi2
 import os
 from datetime import datetime
 from flask import current_app as app
+
 class Base:
     def __init__(self):
         self.connection_url = app.config["DATABASE_URI"]
@@ -28,7 +29,6 @@ class Base:
                     response = cursor.fetchall()
         return response
 
-
 class User(Base):
     def __init__(self, name, username, email, password, birthdate=None, pic="imgs/defaultProfile.jpg"):
         super(User, self).__init__()  # check
@@ -47,7 +47,6 @@ class User(Base):
         insert into users (name, username, password, email, pic, birthdate)
         values ('{self.name}', '{self.username}', '{self.password}', '{self.email}', '{self.pic}', '{self.birthdate}')
         """
-        print(statement)
         self.execute(statement)
 
     def update(self):
@@ -56,11 +55,14 @@ class User(Base):
         """
         self.execute(statement)
 
-    def retrieve(self):
-        statement = """
-        temp
-        """
-        return self.execute(statement)
+    def retrieve(self, queryKey, queryValue=None):
+        statement = f"""
+        select {queryKey} from users"""
+        if (queryValue):
+            statement += f""" 
+            where {queryKey} = {queryValue}
+            """
+        return self.execute(statement, fetch=True)
 
     def delete(self):
         statement = """
