@@ -2,6 +2,7 @@ import psycopg2 as dbapi2
 import os
 from datetime import datetime
 from flask import current_app as app
+from ucuzpisir import login_manager
 
 class Base:
     def __init__(self):
@@ -60,7 +61,7 @@ class User(Base):
         select {queryKey} from users"""
         if (queryValue):
             statement += f""" 
-            where {queryKey} = {queryValue}
+            where {queryKey} = '{queryValue}'
             """
         return self.execute(statement, fetch=True)
 
