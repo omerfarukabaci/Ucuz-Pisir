@@ -67,12 +67,12 @@ class User(Base):
 class Recipe(Base):
     def __init__(self, user_id, title, recipe_text, ingridients, date_posted=datetime.utcnow,  # Fix datetime
                  recipe_img="imgs/defaultRecipe.jpg"):
-        user_id = user_id
-        title = title
-        recipe_text = recipe_text
-        ingridients = ingridients
-        date_posted = date_posted
-        recipe_img = recipe_img
+        self.user_id = user_id
+        self.title = title
+        self.recipe_text = recipe_text
+        self.ingridients = ingridients
+        self.date_posted = date_posted
+        self.recipe_img = recipe_img
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
