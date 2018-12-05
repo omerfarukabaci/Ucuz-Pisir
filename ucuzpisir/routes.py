@@ -2,7 +2,6 @@ from flask import render_template, url_for, flash, redirect
 from ucuzpisir import app, bcrypt
 from ucuzpisir.forms import RegistrationForm, LoginForm
 from ucuzpisir.tables import Base, User
-""" import dbase here"""
 
 recipes = [
     {
@@ -16,42 +15,6 @@ recipes = [
     {
         'title': 'Fish & Chips',
         'image_path': '3.jpg'
-    },
-    {
-        'title': 'New York Steak',
-        'image_path': '4.jpg'
-    },
-    {
-        'title': 'Kung Pao Chicken',
-        'image_path': '5.jpg'
-    },
-    {
-        'title': 'Beef Stroganoff',
-        'image_path': '6.jpg'
-    },
-        {
-        'title': 'Sushi',
-        'image_path': '1.jpg'
-    },
-    {
-        'title': 'Ratatouille',
-        'image_path': '2.jpg'
-    },
-    {
-        'title': 'Fish & Chips',
-        'image_path': '3.jpg'
-    },
-    {
-        'title': 'New York Steak',
-        'image_path': '4.jpg'
-    },
-    {
-        'title': 'Kung Pao Chicken',
-        'image_path': '5.jpg'
-    },
-    {
-        'title': 'Beef Stroganoff',
-        'image_path': '6.jpg'
     }
 ]
 @app.route("/")
