@@ -1,4 +1,7 @@
-# import ??
+import psycopg2 as dbapi2
+import os
+from datetime import datetime
+
 class Base:
     def __init__(self):
         self.connection_url = os.getenv("DATABASE_URL")
@@ -25,16 +28,16 @@ class Base:
 
 
 class User(Base):
-    __init__(self, user_id, username, email, password, birthdate, pic=url_for('static' filename="imgs/defaultProfile.jpg")):
-        user_id = user_id
-        username = username
-        email = email
-        password = password
-        birthdate = birthdate
-        pic = pic
+    def __init__(self, username, email, password, birthdate=None, pic="imgs/defaultProfile.jpg"):
+        #super(User, self).__init__()  # check
+        self.username = username
+        self.email = email
+        self.password = password
+        self.birthdate = birthdate
+        self.pic = pic
 
-    __repr__(self):
-        return f"User('{self.username}', '{self.email}')"
+    def __repr__(self):
+        return f"User('{self.username}', '{self.email}', '{self.pic}')"
 
     def create(self):
         statement = """
@@ -62,8 +65,8 @@ class User(Base):
 
 
 class Recipe(Base):
-    __init__(self, user_id, title, recipe_text, ingridients, date_posted,
-             recipe_img=url_for('static', filename="imgs/defaultRecipe.jpg")):
+    def __init__(self, user_id, title, recipe_text, ingridients, date_posted=datetime.utcnow,  # Fix datetime
+                 recipe_img="imgs/defaultRecipe.jpg"):
         user_id = user_id
         title = title
         recipe_text = recipe_text
@@ -71,7 +74,7 @@ class Recipe(Base):
         date_posted = date_posted
         recipe_img = recipe_img
 
-    __repr__():
+    def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
 
     def create(self):
