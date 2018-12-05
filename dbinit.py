@@ -7,10 +7,11 @@ import psycopg2 as dbapi2
 INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS USERS(
         ID SERIAL PRIMARY KEY,
-        USERNAME VARCHAR(20) UNIQUE NOT NULL,
-        PASSWORD VARCHAR(60) NOT NULL,
+        NAME VARCHAR(50) NOT NULL,
+        USERNAME VARCHAR(50) UNIQUE NOT NULL,
+        PASSWORD VARCHAR(70) NOT NULL,
         EMAIL VARCHAR(80) UNIQUE NOT NULL,
-        PIC VARCHAR(20) DEFAULT 'defaultProfile.jpg',
+        PIC VARCHAR(50) DEFAULT 'defaultProfile.jpg',
         BIRTHDATE DATE
     )
     """,
@@ -34,7 +35,7 @@ def initialize(url):
 
 
 if __name__ == "__main__":
-    url = os.getenv("DATABASE_URL")
+    url = "host='localhost' dbname='ucuzdb' user='postgres' password='.abc020615'"
     if url is None:
         print("Usage: DATABASE_URL=url python dbinit.py", file=sys.stderr)
         sys.exit(1)
