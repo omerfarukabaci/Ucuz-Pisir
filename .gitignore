@@ -1,7 +1,5 @@
 *.pyc
-
 __pycache__
-
 .project
 .pydevproject
 .idea
@@ -9,6 +7,4 @@ __pycache__
 
 venv/
 docs/build/
-
-dev.py
-db_conifg.py
+.vscode/*
