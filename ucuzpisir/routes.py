@@ -1,6 +1,7 @@
 from flask import render_template, url_for, flash, redirect
-from ucuzpisir import app
+from ucuzpisir import app, bcrypt
 from ucuzpisir.forms import RegistrationForm, LoginForm
+from ucuzpisir.tables import Base, User
 """ import dbase here"""
 
 recipes = [
@@ -66,6 +67,9 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        hashedPassword = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, password=hashedPassword, email=form.email.data)
+        user.create() #Fix nad control
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('home'))
     else:
