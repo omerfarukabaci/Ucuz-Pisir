@@ -20,3 +20,5 @@ part4 notes:
             //do we have to use utc?
         content: text, nullabel= false;
         user_id: not nullabel, integer, foreignkey(/*??*/)
+
+config = "host='localhost' dbname='ucuzDB' user='postgres' password='secret'"
