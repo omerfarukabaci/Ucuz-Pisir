@@ -3,6 +3,12 @@ import os
 from datetime import datetime
 from flask import current_app as app
 from ucuzpisir import login_manager
+from flask_login import UserMixin
+
+@login_manager.user_loader
+def load_user(user_id):
+    user = User("1", "2", "3", " " )
+    return user.retrieve('user_id', user_id)[0] #Check this
 
 class Base:
     def __init__(self):
@@ -30,7 +36,7 @@ class Base:
                     response = cursor.fetchall()
         return response
 
-class User(Base):
+class User(Base, UserMixin):
     def __init__(self, name, username, email, password, birthdate=None, pic="imgs/defaultProfile.jpg"):
         super(User, self).__init__()  # check
         self.name = name
