@@ -4,7 +4,7 @@ from datetime import datetime
 
 class Base:
     def __init__(self):
-        self.connection_url = os.getenv("DATABASE_URL")
+        self.connection_url = "host='localhost' dbname='ucuzdb' user='postgres' password='.abc020615'"
 
     def create(self):
         pass
@@ -28,8 +28,9 @@ class Base:
 
 
 class User(Base):
-    def __init__(self, username, email, password, birthdate=None, pic="imgs/defaultProfile.jpg"):
-        #super(User, self).__init__()  # check
+    def __init__(self, name, username, email, password, birthdate=None, pic="imgs/defaultProfile.jpg"):
+        super(User, self).__init__()  # check
+        self.name = name
         self.username = username
         self.email = email
         self.password = password
@@ -40,9 +41,11 @@ class User(Base):
         return f"User('{self.username}', '{self.email}', '{self.pic}')"
 
     def create(self):
-        statement = """
-        temp
+        statement = f"""
+        insert into users (username, password, email, pic, birthdate)
+        values ('{self.username}', '{self.password}', '{self.email}', '{self.pic}', '{self.birthdate}')
         """
+        print(statement)
         self.execute(statement)
 
     def update(self):
