@@ -7,6 +7,6 @@ __pycache__
 
 venv/
 docs/build/
-.vscode/*
+.vscode/settings.json
 
 local_dbinit.py
