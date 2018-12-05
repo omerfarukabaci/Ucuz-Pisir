@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import current_app as app
 class Base:
     def __init__(self):
-        self.connection_url = app.config["DATABASE_URL"]
+        self.connection_url = app.config["DATABASE_URI"]
         #self.connection_url = app.databae_url
 
     def create(self):
@@ -21,7 +21,7 @@ class Base:
 
     def execute(self, statement, fetch=False):
         response = None
-        with dbapi2.connect(app.database_url) as connection:
+        with dbapi2.connect(self.connection_url) as connection:
             with connection.cursor() as cursor:
                 cursor.execute(statement)
                 if fetch:
