@@ -68,7 +68,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashedPassword = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, password=hashedPassword, email=form.email.data)
+        user = User(username=form.username.data, name=form.name.data, password=hashedPassword, email=form.email.data, birthdate=form.birthdate.data)
         user.create() #Fix nad control
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('home'))
