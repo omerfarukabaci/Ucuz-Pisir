@@ -18,12 +18,13 @@ class Base:
     def delete(self):
         pass
 
-    def execute(self, statement):
+    def execute(self, statement, fetch=False):
         response = None
         with dbapi2.connect(self.connection_url) as connection:
             with connection.cursor() as cursor:
                 cursor.execute(statement)
-                response = cursor.fetchall()
+                if fetch:
+                    response = cursor.fetchall()
         return response
 
 
@@ -42,8 +43,8 @@ class User(Base):
 
     def create(self):
         statement = f"""
-        insert into users (username, password, email, pic, birthdate)
-        values ('{self.username}', '{self.password}', '{self.email}', '{self.pic}', '{self.birthdate}')
+        insert into users (name, username, password, email, pic, birthdate)
+        values ('{self.name}', '{self.username}', '{self.password}', '{self.email}', '{self.pic}', '{self.birthdate}')
         """
         print(statement)
         self.execute(statement)
