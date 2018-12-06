@@ -10,3 +10,4 @@ docs/build/
 .vscode/settings.json
 
 local_dbinit.py
+development.py
