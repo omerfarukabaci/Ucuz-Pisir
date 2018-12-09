@@ -29,3 +29,6 @@ useful heroku CLI commands:
     push database:       heroku pg:push mylocaldb DATABASE_URL --app itucsdb1806
     destroy database:    heroku addons:destroy heroku-postgresql:hobby-dev
     create database:     heroku addons:create heroku-postgresql:hobby-dev -a itucsdb1806 --block-logs
+
+    reference:
+        https://devcenter.heroku.com/articles/heroku-postgresql#expensive-queries
