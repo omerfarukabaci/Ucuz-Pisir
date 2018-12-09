@@ -21,4 +21,11 @@ part4 notes:
         content: text, nullabel= false;
         user_id: not nullabel, integer, foreignkey(/*??*/)
 
-config = "host='localhost' dbname='ucuzDB' user='postgres' password='secret'"
+heroku_cli:
+    reference:
+        https://devcenter.heroku.com/articles/heroku-postgresql#expensive-queries
+
+    To drop and recreate your database use pg:reset.
+        heroku pg:reset DATABASE
+    To reach server's database from terminal
+        heroku pg:psql -a itucsdb1806
