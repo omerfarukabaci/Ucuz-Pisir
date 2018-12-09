@@ -5,9 +5,10 @@ __pycache__
 .idea
 .code
 
+
 venv/
 docs/build/
-.vscode/
+.vscode/launch.json
 
 local_dbinit.py
 development.py
