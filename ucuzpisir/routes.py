@@ -67,6 +67,7 @@ def login():
 
 @app.route("/logout")
 def logout():
+    flash(f'Goodbye {current_user.username}!', 'alert alert-info')
     logout_user()
     return redirect(url_for('home'))
 
