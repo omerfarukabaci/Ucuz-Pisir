@@ -7,8 +7,13 @@ from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
-    user = User("1", "2", "3", " " )
-    return user.retrieve('user_id', user_id)[0] #Check this
+    userData = User().retrieve('*', f"user_id = {user_id}")
+    if userData:
+        user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2], password=userData[0][3],
+                    email=userData[0][4], pic=userData[0][5], birthdate=userData[0][6])
+    else:
+        user = None
+    return user
 
 class Base:
     def __init__(self):
@@ -37,8 +42,9 @@ class Base:
 
 class User(Base, UserMixin):
 
-    def __init__(self, name = None, username = None, email = None, password = None, birthdate=None, pic="imgs/defaultProfile.jpg"):
+    def __init__(self, user_id = None, name = None, username = None, email = None, password = None, birthdate=None, pic="imgs/defaultProfile.jpg"):
         super(User, self).__init__()  # check
+        self.user_id = user_id
         self.name = name
         self.username = username
         self.email = email
@@ -76,6 +82,9 @@ class User(Base, UserMixin):
         temp
         """
         self.execute(statement)
+    
+    def get_id(self):
+        return str(self.user_id)
 
 
 class Recipe(Base):
