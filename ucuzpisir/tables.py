@@ -62,12 +62,12 @@ class User(Base, UserMixin):
         """
         self.execute(statement)
 
-    def retrieve(self, queryKey, queryValue=None):
+    def retrieve(self, queryKey, condition=None):
         statement = f"""
         select {queryKey} from users"""
-        if (queryValue):
+        if (condition):
             statement += f""" 
-            where {queryKey} = '{queryValue}'
+            where {condition}
             """
         return self.execute(statement, fetch=True)
 
