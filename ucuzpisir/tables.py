@@ -13,7 +13,6 @@ def load_user(user_id):
 class Base:
     def __init__(self):
         self.connection_url = app.config["DATABASE_URI"]
-        #self.connection_url = app.databae_url
 
     def create(self):
         pass
@@ -37,7 +36,8 @@ class Base:
         return response
 
 class User(Base, UserMixin):
-    def __init__(self, name, username, email, password, birthdate=None, pic="imgs/defaultProfile.jpg"):
+
+    def __init__(self, name = None, username = None, email = None, password = None, birthdate=None, pic="imgs/defaultProfile.jpg"):
         super(User, self).__init__()  # check
         self.name = name
         self.username = username
