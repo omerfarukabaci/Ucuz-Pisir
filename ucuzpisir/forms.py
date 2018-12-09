@@ -19,16 +19,14 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
-        user = User("1", "2", "3", " " )
-        flag = user.retrieve('username', username.data)
-        if flag:
+        user = User().retrieve('username', username.data)
+        if user:
             raise ValidationError(
                 'That username is taken. Please choose a different one.')
 
     def validate_email(self, email):
-        user = User("1", "2", "3", " " )
-        flag = user.retrieve('email', email.data)
-        if flag:
+        user = User().retrieve('email', email.data)
+        if user:
             raise ValidationError(
                 'That email is taken. Please choose a different one.')
 
