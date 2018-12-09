@@ -1,4 +1,5 @@
 from flask import render_template, url_for, flash, redirect
+from flask_login import login_user, current_user, logout_user
 from ucuzpisir import app, bcrypt
 from ucuzpisir.forms import RegistrationForm, LoginForm
 from ucuzpisir.tables import Base, User
@@ -28,6 +29,8 @@ def about():
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashedPassword = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -40,13 +43,30 @@ def register():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        print('Success!')
-        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
-            flash(f'You have been logged in!', 'alert alert-success')
+        userData = User().retrieve('*', f"email = '{form.email.data}'")
+        if userData:
+            user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2], password=userData[0][3],
+                        email=userData[0][4], pic=userData[0][5], birthdate=userData[0][6])
+        else:
+            user = None
+            
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
             return redirect(url_for('home'))
         else:
-            flash(f'Login Unsuccessful. Please check username and password', 'alert alert-danger')
-
+            flash(f'Login Unsuccessful. Please check e-mail and password', 'alert alert-danger')
     return render_template('login.html', title='Login', form=form)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
+
+@app.route("/account")
+def account():
+    return render_template('account.html', title='Account')
