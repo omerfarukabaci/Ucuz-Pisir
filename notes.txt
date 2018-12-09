@@ -21,4 +21,11 @@ part4 notes:
         content: text, nullabel= false;
         user_id: not nullabel, integer, foreignkey(/*??*/)
 
-config = "host='localhost' dbname='ucuzDB' user='postgres' password='secret'"
+useful heroku CLI commands:
+    read logs:           heroku logs -a itucsdb1806
+    connect to database: heroku pg:psql -a itucsdb1806
+    reset database:      heroku pg:reset DATABASE_URL -a itucsdb1806
+    pull database:       heroku pg:pull DATABASE_URL mylocaldb --app itucsdb1806
+    push database:       heroku pg:push mylocaldb DATABASE_URL --app itucsdb1806
+    destroy database:    heroku addons:destroy heroku-postgresql:hobby-dev
+    create database:     heroku addons:create heroku-postgresql:hobby-dev -a itucsdb1806 --block-logs
