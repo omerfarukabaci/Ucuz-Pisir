@@ -67,6 +67,7 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 @app.route("/logout")
+@login_required
 def logout():
     flash(f'Goodbye {current_user.username}!', 'alert alert-info alert-dismissible fade show')
     logout_user()
