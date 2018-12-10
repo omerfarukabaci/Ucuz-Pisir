@@ -41,7 +41,7 @@ def register():
         user.create()  # Fix nad control
         flash(f'Account created for {form.username.data}!',
               'alert alert-success alert-dismissible fade show')
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
