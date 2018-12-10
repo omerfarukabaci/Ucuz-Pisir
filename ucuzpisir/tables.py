@@ -69,8 +69,11 @@ class User(Base, UserMixin):
         self.execute(statement)
 
     def update(self):
-        statement = """
-        temp
+        statement = f"""
+        update users 
+        set name ='{self.name}', username='{self.username}', email='{self.email}',
+        pic='{self.pic}', birthdate='{self.birthdate}'
+        where user_id = {self.user_id}
         """
         self.execute(statement)
 
@@ -94,7 +97,8 @@ class User(Base, UserMixin):
 
 
 class Recipe(Base):
-    def __init__(self, user_id, title, recipe_text, ingridients, date_posted=datetime.utcnow,  # Fix datetime
+    def __init__(self, user_id, title, recipe_text, ingridients,
+                 date_posted=datetime.utcnow,  # Fix datetime
                  recipe_img="imgs/defaultRecipe.jpg"):
         self.user_id = user_id
         self.title = title
