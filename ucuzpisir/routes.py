@@ -18,14 +18,15 @@ recipes = [
         'image_path': '3.jpg'
     }
 ]
+
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', content = recipes)
+    return render_template('home.html', content=recipes)
 
 @app.route("/about")
 def about():
-    return render_template('about.html', title = 'About')
+    return render_template('about.html', title='About')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -33,12 +34,14 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashedPassword = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, name=form.name.data, password=hashedPassword, email=form.email.data, birthdate=form.birthdate.data)
-        user.create() #Fix nad control
-        flash(f'Account created for {form.username.data}!', 'alert alert-success alert-dismissible fade show')
+        hashedPassword = bcrypt.generate_password_hash(
+            form.password.data).decode('utf-8')
+        user = User(username=form.username.data, name=form.name.data,
+                    password=hashedPassword, email=form.email.data, birthdate=form.birthdate.data)
+        user.create()  # Fix nad control
+        flash(f'Account created for {form.username.data}!',
+              'alert alert-success alert-dismissible fade show')
         return redirect(url_for('home'))
-
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -53,28 +56,32 @@ def login():
                         email=userData[0][4], pic=userData[0][5], birthdate=userData[0][6])
         else:
             user = None
-            
+
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next') 
+            next_page = request.args.get('next')
             if next_page:
                 return redirect(next_page)
             else:
                 return redirect(url_for('home'))
         else:
             flash(f'Login Unsuccessful. Please check e-mail and password',
-                    'alert alert-danger alert-dismissible fade show')
+                  'alert alert-danger alert-dismissible fade show')
     return render_template('login.html', title='Login', form=form)
 
 @app.route("/logout")
 @login_required
 def logout():
-    flash(f'Goodbye {current_user.username}!', 'alert alert-info alert-dismissible fade show')
+    flash(f'Goodbye {current_user.username}!',
+          'alert alert-info alert-dismissible fade show')
     logout_user()
     return redirect(url_for('home'))
-
 
 @app.route("/account")
 @login_required
 def account():
-    return render_template('account.html', title='Account')
+    form = None
+    image_file = url_for(
+        'static', filename='imgs' + current_user.image_file)
+    return render_template('account.html', title='Account',
+                           image_file=image_file, form=form)
