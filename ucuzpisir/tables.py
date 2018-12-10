@@ -5,15 +5,18 @@ from flask import current_app as app
 from ucuzpisir import login_manager
 from flask_login import UserMixin
 
+
 @login_manager.user_loader
 def load_user(user_id):
     userData = User().retrieve('*', f"user_id = {user_id}")
     if userData:
-        user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2], password=userData[0][3],
-                    email=userData[0][4], pic=userData[0][5], birthdate=userData[0][6])
+        user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2],
+                    password=userData[0][3], email=userData[0][4],
+                    pic=userData[0][5], birthdate=userData[0][6])
     else:
         user = None
     return user
+
 
 class Base:
     def __init__(self):
@@ -40,9 +43,11 @@ class Base:
                     response = cursor.fetchall()
         return response
 
+
 class User(Base, UserMixin):
 
-    def __init__(self, user_id = None, name = None, username = None, email = None, password = None, birthdate=None, pic="imgs/defaultProfile.jpg"):
+    def __init__(self, user_id=None, name=None, username=None,
+                 email=None, password=None, birthdate=None, pic="defaultProfile.jpg"):
         super(User, self).__init__()  # check
         self.user_id = user_id
         self.name = name
@@ -82,7 +87,7 @@ class User(Base, UserMixin):
         temp
         """
         self.execute(statement)
-    
+
     def get_id(self):
         return str(self.user_id)
 
