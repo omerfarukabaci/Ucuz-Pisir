@@ -82,13 +82,19 @@ def logout():
 def account():
     form = AccountUpdateForm()
     if form.validate_on_submit():
+        current_user.username = form.username.data
         current_user.name = form.name.data
         current_user.email = form.email.data
-        current_user.username = form.username.data
+        current_user.birthdate = form.birthdate.data
         current_user.update()  # Fix nad control
         flash(f'Account updated!',
               'alert alert-success alert-dismissible fade show')
         return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.name.data = current_user.name
+        form.email.data = current_user.email
+        form.birthdate.data = current_user.birthdate
     profile_pic = url_for(
         'static', filename='imgs/' + current_user.pic)
     return render_template('account.html', title='Account',
