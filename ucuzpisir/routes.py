@@ -82,6 +82,7 @@ def logout():
 def account():
     form = AccountUpdateForm()
     if form.validate_on_submit():
+        current_user.name = form.name.data
         current_user.email = form.email.data
         current_user.username = form.username.data
         current_user.update()  # Fix nad control
