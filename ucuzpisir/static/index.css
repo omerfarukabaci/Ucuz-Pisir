@@ -1,36 +1,10 @@
 body {
     background-color: #fff4e6;
-    padding-top: 50px;
     font-family: 'Righteous', cursive;
 }
 
-.navbar {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    background-color: #854442;
-    height: 50px;
-}
-
-.nav-item{
-    padding-top: 12px;
-    transition: 0.5s;
-    height: 50px;
-}
-
-.nav-item:hover{
-    object-fit: fill;
-    background-color: #613331;
-    transition: 0.5s;
-}
-
 .container {
-    display: grid;
-    grid-template-rows: repeat(3, auto);
-    grid-template-columns: auto auto auto auto;
-    grid-column-gap: 30px;
-    grid-row-gap: 15px;
-    padding: 10px;
+    padding: 2%;
 }
 
 .card {
