@@ -1,5 +1,5 @@
 Html/Templates:
-  ☐ change text from Turkish to English in the route "/login" and "/register". @started(18-11-07 17:17)
+  ☐ change text in the routes "/login" and "/register" from Turkish to English . @started(18-11-07 17:17)
   ☐ Add footer: @started(18-11-07 17:17)
       ☐ Maybe move: about link from header to footer @started(18-11-07 17:17)
   ☐ recipe.html @started(18-12-04 21:24)
@@ -11,6 +11,5 @@ Gitignore:
   ☐ Check if docs/build ignore correct. @started(18-12-04 20:07)
 
 Users:
-  ☐ Connect it to database
-  ☐ Fix SQLalchemy parts inside custom validations of register @started(18-11-07 23:07)
+  ✔ Fix SQLalchemy parts inside custom validations of register @started(18-11-07 23:07) @done(18-12-09 23:01) @lasted(4w3d23h54m53s)
 
