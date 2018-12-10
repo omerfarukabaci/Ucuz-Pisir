@@ -46,6 +46,11 @@
                     <a class="nav-item nav-link" href="{{url_for('home')}}">Tarif Ara</a>
                     <a class="nav-item nav-link" href="{{url_for('about')}}">Hakkımızda</a>
                 </div>
+
+                <form class="form-inline my-2 my-lg-0 w-50 justify-content-center">
+                    <input class="form-control mr-sm-2 btn-block w-75" type="" placeholder="Tarif ara" aria-label="Search">
+                    <button class="btn btn-light" type="submit">Ara</button>
+                </form>
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
                     {% if current_user.is_authenticated %}
