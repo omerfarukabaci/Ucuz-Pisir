@@ -81,7 +81,7 @@ def logout():
 @login_required
 def account():
     form = None
-    image_file = url_for(
-        'static', filename='imgs' + current_user.image_file)
+    profile_pic = url_for(
+        'static', filename='imgs/' + current_user.pic)
     return render_template('account.html', title='Account',
-                           image_file=image_file, form=form)
+                           profile_pic=profile_pic, form=form)
