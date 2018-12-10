@@ -12,9 +12,61 @@
         {% else %}<title>Ucuzpisir</title>{% endif %}
     </head>
 	<body>
+        <!--To Do: 
+            - change: active links' classes
+            - fix links: for recipes, search recipe
+        -->  
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #854442;">
+            <a class="navbar-brand ml-3" style="color: rgb(231, 197, 183)" href="{{url_for('home')}}">Ucuz Pişir</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active mx-2">
+                        <a class="nav-link" href="{{url_for('home')}}">Ana Sayfa<span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="{{url_for('home')}}">Tarifler</a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link disabled" href="{{url_for('home')}}">Hakkımızda</a>
+                    </li>
+
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item dropdown mx-2">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hesabım
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{url_for('account')}}">Profil</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{url_for('logout')}}">Çıkış Yap</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="{{url_for('login')}}">Giriş Yap</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="{{url_for('register')}}">Üye Ol</a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+                <form class="form-inline my-2 my-lg-0 w-50 ml-auto">
+                        <input class="form-control mr-sm-2 w-75" type="search" placeholder="Tarif Ara" aria-label="Search">
+                        <button class="btn btn-light my-2 my-sm-0" style="background-color: cornsilk" type="submit">Ara</button>
+                </form>   
+            </div>
+        </nav>
+
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                <div class="flashes">
+                <div class="flashes mx-0 my-0">
                 {% for category, message in messages %}
                     <div class="{{ category }} w-auto text-center" role="alert">
                         {{ message }}
@@ -27,44 +79,6 @@
                 </div>
             {% endif %}
         {% endwith %}
-        <!--To Do: 
-            - change: active links' classes
-            - fix links: for recipes, search recipe
-        -->
-
-        <header class="site-header">
-        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-            <div class="container">
-            <a class="navbar-brand mr-4" href="{{url_for('home')}}">Ucuz Pişir</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarToggle">
-                <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{{url_for('home')}}">Ana Sayfa</a>
-                    <a class="nav-item nav-link" href="{{url_for('home')}}">Tarifler</a>
-                    <a class="nav-item nav-link" href="{{url_for('home')}}">Tarif Ara</a>
-                    <a class="nav-item nav-link" href="{{url_for('home')}}">Hakkımızda</a>
-                </div>
-
-                <form class="form-inline my-2 my-lg-0 flex-fill justify-content-center">
-                    <input class="form-control mr-sm-2 ml-1 btn-block flex-fill" type="" placeholder="Tarif ara" aria-label="Search">
-                    <button class="btn btn-light mr-1" type="submit">Ara</button>
-                </form>
-                <!-- Navbar Right Side -->
-                <div class="navbar-nav">
-                    {% if current_user.is_authenticated %}
-                        <a class="nav-item nav-link" href="{{url_for('account')}}">Hesabım</a>
-                        <a class="nav-item nav-link" href="{{url_for('logout')}}">Çıkış Yap</a>
-                    {% else %}
-                        <a class="nav-item nav-link" href="{{url_for('login')}}">Üye Girişi</a>
-                        <a class="nav-item nav-link" href="{{url_for('register')}}">Üye Ol</a>
-                    {% endif %}
-                </div>
-            </div>
-            </div>
-        </nav>
-        </header>
 
         <main role="main" class="container">
             {% block content %}{% endblock %}
