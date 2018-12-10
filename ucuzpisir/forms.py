@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from ucuzpisir.tables import User
@@ -49,6 +50,7 @@ class AccountUpdateForm(FlaskForm):
                               render_kw={"placeholder": "DD/MM/YYYY"})
     email = StringField('Email',
                         validators=[DataRequired(), Email(), Length(max=80)])
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
