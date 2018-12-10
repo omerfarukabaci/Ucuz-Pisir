@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from ucuzpisir import app, bcrypt
-from ucuzpisir.forms import RegistrationForm, LoginForm
+from ucuzpisir.forms import RegistrationForm, LoginForm, AccountUpdateForm
 from ucuzpisir.tables import Base, User
 
 recipes = [
@@ -77,10 +77,17 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route("/account")
+@app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    form = None
+    form = AccountUpdateForm()
+    if form.validate_on_submit():
+        current_user.email = form.email.data
+        current_user.username = form.username.data
+        current_user.update()  # Fix nad control
+        flash(f'Account updated!',
+              'alert alert-success alert-dismissible fade show')
+        return redirect(url_for('account'))
     profile_pic = url_for(
         'static', filename='imgs/' + current_user.pic)
     return render_template('account.html', title='Account',
