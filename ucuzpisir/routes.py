@@ -36,7 +36,7 @@ def register():
         hashedPassword = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, name=form.name.data, password=hashedPassword, email=form.email.data, birthdate=form.birthdate.data)
         user.create() #Fix nad control
-        flash(f'Account created for {form.username.data}!', 'alert alert-success')
+        flash(f'Account created for {form.username.data}!', 'alert alert-success alert-dismissible fade show')
         return redirect(url_for('home'))
 
     return render_template('register.html', title='Register', form=form)
@@ -62,12 +62,13 @@ def login():
             else:
                 return redirect(url_for('home'))
         else:
-            flash(f'Login Unsuccessful. Please check e-mail and password', 'alert alert-danger')
+            flash(f'Login Unsuccessful. Please check e-mail and password',
+                    'alert alert-danger alert-dismissible fade show')
     return render_template('login.html', title='Login', form=form)
 
 @app.route("/logout")
 def logout():
-    flash(f'Goodbye {current_user.username}!', 'alert alert-info')
+    flash(f'Goodbye {current_user.username}!', 'alert alert-info alert-dismissible fade show')
     logout_user()
     return redirect(url_for('home'))
 
