@@ -47,7 +47,7 @@ class Base:
 class User(Base, UserMixin):
 
     def __init__(self, user_id=None, name=None, username=None,
-                 email=None, password=None, birthdate=None, pic="defaultProfile.jpg"):
+                 email=None, password=None, birthdate=None, pic="default_user.jpg"):
         super(User, self).__init__()  # check
         self.user_id = user_id
         self.name = name
@@ -63,7 +63,8 @@ class User(Base, UserMixin):
     def create(self):
         statement = f"""
         insert into users (name, username, password, email, pic, birthdate)
-        values ('{self.name}', '{self.username}', '{self.password}', '{self.email}', '{self.pic}', '{self.birthdate}')
+        values ('{self.name}', '{self.username}', '{self.password}', '{self.email}',
+        '{self.pic}', '{self.birthdate}')
         """
         self.execute(statement)
 
