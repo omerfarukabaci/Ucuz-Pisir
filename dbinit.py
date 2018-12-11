@@ -45,8 +45,8 @@ def initialize(url):
 
 def insertDefaultImage(url):
     with open('ucuzpisir/static/imgs/default_user.jpg', 'rb') as f:
-        imageData = f.read()
-        defaultImage = User_image(url=url, filename='default', extension='jpg',
+        imageData = f
+        defaultImage = User_image(url=url, filename='default', extension='jpeg',
                                   img_data=imageData)
         defaultImage.create()
 
