@@ -155,9 +155,10 @@ class User_image(Base):
             """
         return self.execute(statement, fetch=True)
 
-    def delete(self):
-        statement = """
-        temp
+    def delete(self, img_id):
+        statement = f"""
+        delete from user_images
+        where img_id = {img_id}
         """
         self.execute(statement)
 
