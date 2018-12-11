@@ -158,7 +158,7 @@ class User_image(Base):
         self.execute(statement)
 
     def shrinkImage(self, size=[125, 125]):
-        img = Image.open(img_data)
-        img.thumbnail((125, 125))
+        img = Image.open(self.img_data)
+        img.thumbnail((size[0], size[1]))
         self.img_data = img.getdata()
-        dbapi2.Binary(img_data)
+        dbapi2.Binary(self.img_data)
