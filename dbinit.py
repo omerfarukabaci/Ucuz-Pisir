@@ -48,7 +48,7 @@ def insertDefaultImage(url):
         imageData = f
         defaultImage = User_image(url=url, filename='default', extension='jpeg',
                                   img_data=imageData)
-        defaultImage.create()
+        defaultImage.create(condition='NOT EXISTS (SELECT IMG_ID FROM USER_IMAGES WHERE IMG_ID = 1)')
 
 
 if __name__ == "__main__":
