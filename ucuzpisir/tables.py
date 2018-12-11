@@ -130,15 +130,12 @@ class User_image(Base):
     def __repr__(self):
         return f"Post('{self.filename}', '{self.date_uploaded}')"
 
-    def create(self, condition=None):
+    def create(self):
         statement = f"""
         insert into user_images (filename, extension, img_data)
         values ('{self.filename}', '{self.extension}', {dbapi2.Binary(self.img_data)})
+        ON CONFLICT DO NOTHING
         """
-        if condition:
-            statement += f"""
-            where {condition}
-            """
         self.execute(statement)
 
     def update(self):
