@@ -146,7 +146,7 @@ class User_image(Base):
         """
         self.execute(statement)
 
-    def retrieve(self, queryKey, condition):
+    def retrieve(self, queryKey, condition=None):
         statement = f"""
         select {queryKey} from user_images"""
         if (condition):
