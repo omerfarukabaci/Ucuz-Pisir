@@ -33,6 +33,7 @@ INIT_STATEMENTS = [
     """
 ]
 
+
 def initialize(url):
     with dbapi2.connect(url) as connection:
         cursor = connection.cursor()
@@ -41,11 +42,12 @@ def initialize(url):
         cursor.close()
     insertDefaultImage(url)
 
+
 def insertDefaultImage(url):
     with open('ucuzpisir/static/imgs/default_user.jpg', 'rb') as f:
         imageData = f.read()
-        defaultImage = User_image(url = url, filename='default', extension='jpg',
-                            img_data=imageData)
+        defaultImage = User_image(url=url, filename='default', extension='jpg',
+                                  img_data=imageData)
         defaultImage.create()
 
 

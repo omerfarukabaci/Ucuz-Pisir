@@ -6,6 +6,7 @@ from ucuzpisir import login_manager
 from flask_login import UserMixin
 from PIL import Image
 
+
 @login_manager.user_loader
 def load_user(user_id):
     userData = User().retrieve('*', f"user_id = {user_id}")
@@ -115,15 +116,16 @@ class Recipe(Base):
 
 
 class User_image(Base):
-    def __init__(self, url = None, img_id = None, filename = None, extension = None, img_data = None,
-                 date_uploaded = None):
-        super(User_image, self).__init__(url = url)
+    def __init__(self, url=None, img_id=None, filename=None, extension=None, img_data=None,
+                 date_uploaded=None):
+        super(User_image, self).__init__(url=url)
         self.img_id = img_id
         self.filename = filename
         self.extension = extension
         self.img_data = img_data
         self.shrinkImage()
         self.date_uploaded = date_uploaded
+
     def __repr__(self):
         return f"Post('{self.filename}', '{self.date_uploaded}')"
 

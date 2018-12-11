@@ -19,14 +19,17 @@ recipes = [
     }
 ]
 
+
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template('home.html', content=recipes)
 
+
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
+
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -43,6 +46,7 @@ def register():
               'alert alert-success alert-dismissible fade show')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -69,6 +73,7 @@ def login():
                   'alert alert-danger alert-dismissible fade show')
     return render_template('login.html', title='Login', form=form)
 
+
 @app.route("/logout")
 @login_required
 def logout():
@@ -76,6 +81,7 @@ def logout():
           'alert alert-info alert-dismissible fade show')
     logout_user()
     return redirect(url_for('home'))
+
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required

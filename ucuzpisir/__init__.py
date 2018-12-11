@@ -10,4 +10,5 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'alert alert-info alert-dismissible fade show' 
 
-from ucuzpisir import routes #Reminder: There is a reason this line is here but not on top.
+from ucuzpisir import routes
+#Reminder: There is a reason this line is here but not on top. Don't use format document on this file.

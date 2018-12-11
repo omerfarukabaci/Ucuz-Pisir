@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from ucuzpisir.tables import User
 from flask_login import current_user
 
+
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
@@ -41,6 +42,7 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
+
 class AccountUpdateForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
@@ -50,7 +52,8 @@ class AccountUpdateForm(FlaskForm):
                               render_kw={"placeholder": "DD/MM/YYYY"})
     email = StringField('Email',
                         validators=[DataRequired(), Email(), Length(max=80)])
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    picture = FileField('Update Profile Picture', validators=[
+                        FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
@@ -66,4 +69,3 @@ class AccountUpdateForm(FlaskForm):
             if user:
                 raise ValidationError(
                     'That email is taken. Please choose a different one.')
-
