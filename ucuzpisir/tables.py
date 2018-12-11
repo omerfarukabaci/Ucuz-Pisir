@@ -5,7 +5,6 @@ from flask import current_app as app
 from ucuzpisir import login_manager
 from flask_login import UserMixin
 
-
 @login_manager.user_loader
 def load_user(user_id):
     userData = User().retrieve('*', f"user_id = {user_id}")
@@ -110,23 +109,42 @@ class Recipe(Base):
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
 
+
+class User_image(Base):
+    def __init__(self, img_id = None, filename = None, extension = None, img_data = None,
+                 date_uploaded = None, user_id = None):
+        self.img_id = img_id
+        self.filename = filename
+        self.extension = extension 
+        self.img_data = img_data 
+        self.date_uploaded = date_uploaded
+        self.user_id = user_id
+    def __repr__(self):
+        return f"Post('{self.filename}', '{self.date_uploaded}')"
+
     def create(self):
-        statement = """
-        temp
+        statement = f"""
+        insert into user_images (filename, extension, img_data, user_id)
+        values ('{self.filename}', '{self.extension}', '{self.img_data}', {self.user_id})
         """
         self.execute(statement)
 
     def update(self):
-        statement = """
-        temp
+        statement = f"""
+        update user_images 
+        set filename ='{self.filename}', extension='{self.extension}', img_data='{self.img_data}'
+        where user_id = {self.user_id}
         """
         self.execute(statement)
 
-    def retrieve(self):
-        statement = """
-        temp
-        """
-        return self.execute(statement)
+    def retrieve(self, queryKey, condition):
+        statement = f"""
+        select {queryKey} from user_images"""
+        if (condition):
+            statement += f""" 
+            where {condition}
+            """
+        return self.execute(statement, fetch=True)
 
     def delete(self):
         statement = """
