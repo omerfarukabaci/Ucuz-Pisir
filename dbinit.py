@@ -1,8 +1,6 @@
 import os
 import sys
-
 import psycopg2 as dbapi2
-
 
 INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS USERS(
@@ -15,16 +13,23 @@ INIT_STATEMENTS = [
         BIRTHDATE DATE
     )
     """,
-    """CREATE TABLE IF NOT EXISTS RECIPE(
+    """CREATE TABLE IF NOT EXISTS RECIPES(
         RECIPE_ID SERIAL PRIMARY KEY,
         TITLE VARCHAR(80) NOT NULL,
         CONTENT TEXT NOT NULL,
         PIC VARCHAR(20) DEFAULT 'defaultRecipe.jpg',
         DATE_POSTED TIMESTAMP,
         USER_ID INTEGER REFERENCES USERS(USER_ID)
-    )"""
+    )""",
+    """CREATE TABLE IF NOT EXISTS USER_IMAGES(
+        IMG_ID SERIAL PRIMARY KEY,
+        FILENAME VARCHAR(16) UNIQUE NOT NULL,
+        EXTENSION VARCHAR(7) NOT NULL,
+        IMG_DATA BYTEA NOT NULL,
+        DATE_UPLOADED DATE DEFAULT current_date,
+        USER_ID INTEGER REFERENCES USERS(USER_ID)
+    """    
 ]
-
 
 def initialize(url):
     with dbapi2.connect(url) as connection:
