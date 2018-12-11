@@ -14,7 +14,7 @@ def load_user(user_id):
     if userData:
         user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2],
                     password=userData[0][3], email=userData[0][4],
-                    pic=userData[0][5], birthdate=userData[0][6])
+                    img_id=userData[0][5], birthdate=userData[0][6])
     else:
         user = None
     return user
@@ -63,7 +63,7 @@ class User(Base, UserMixin):
         self.img_id = img_id
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.pic}')"
+        return f"User('{self.username}', '{self.email}', '{self.name}')"
 
     def create(self):
         statement = f"""
@@ -136,7 +136,8 @@ class User_image(Base):
         values ('{self.filename}', '{self.extension}', {dbapi2.Binary(self.img_data)})
         """
         if condition:
-            statement += f"""where {condition}
+            statement += f"""
+            where {condition}
             """
         self.execute(statement)
 

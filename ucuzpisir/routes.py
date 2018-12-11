@@ -101,7 +101,7 @@ def account():
         form.name.data = current_user.name
         form.email.data = current_user.email
         form.birthdate.data = current_user.birthdate
-    profile_pic = url_for(
-        'static', filename='imgs/' + current_user.pic)
+    """ profile_pic = url_for(
+        'static', filename='imgs/' + current_user.pic) """
     return render_template('account.html', title='Account',
-                           profile_pic=profile_pic, form=form)
+                           form=form)
