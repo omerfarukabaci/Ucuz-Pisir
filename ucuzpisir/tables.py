@@ -1,5 +1,6 @@
 import psycopg2 as dbapi2
 import os
+import io
 from datetime import datetime
 from flask import current_app as app
 from ucuzpisir import login_manager
@@ -132,7 +133,7 @@ class User_image(Base):
     def create(self):
         statement = f"""
         insert into user_images (filename, extension, img_data)
-        values ('{self.filename}', '{self.extension}', {self.img_data})
+        values ('{self.filename}', '{self.extension}', {dbapi2.Binary(self.img_data)})
         """
         self.execute(statement)
 
@@ -159,8 +160,9 @@ class User_image(Base):
         """
         self.execute(statement)
 
-    def shrinkImage(self, size=[125, 125]):
+    def shrinkImage(self, size=(125, 125)):
         img = Image.open(self.img_data)
-        img.thumbnail((size[0], size[1]))
-        self.img_data = img.getdata()
-        dbapi2.Binary(self.img_data)
+        img.thumbnail(size)
+        output = io.BytesIO()
+        img.save(output, format=self.extension)
+        self.img_data = output.getvalue()
