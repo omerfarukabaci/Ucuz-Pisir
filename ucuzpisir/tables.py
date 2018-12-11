@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import current_app as app
 from ucuzpisir import login_manager
 from flask_login import UserMixin
-from PIL import Image
+from PIL import Image, ImageOps
 
 
 @login_manager.user_loader
@@ -165,7 +165,7 @@ class User_image(Base):
         if self.filename == None:
             return
         img = Image.open(self.img_data)
-        img.thumbnail(size)
+        thumb = ImageOps.fit(img, size, Image.ANTIALIAS)
         output = io.BytesIO()
-        img.save(output, format=self.extension)
+        thumb.save(output, format=self.extension)
         self.img_data = output.getvalue()
