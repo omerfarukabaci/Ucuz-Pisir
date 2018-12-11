@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from ucuzpisir import app, bcrypt
 from ucuzpisir.forms import RegistrationForm, LoginForm, AccountUpdateForm
-from ucuzpisir.tables import Base, User
+from ucuzpisir.tables import Base, User, User_image
 
 recipes = [
     {
@@ -101,7 +101,12 @@ def account():
         form.name.data = current_user.name
         form.email.data = current_user.email
         form.birthdate.data = current_user.birthdate
-    """ profile_pic = url_for(
-        'static', filename='imgs/' + current_user.pic) """
+        image_path = url_for('getImage', img_id=current_user.img_id)
     return render_template('account.html', title='Account',
-                           form=form)
+                           image_path=image_path, form=form)
+
+
+@app.route("/getImage/<int:img_id>", methods=['GET', 'POST'])
+def getImage(img_id):
+    img_data = User_image().retrieve('img_data', f'img_id = {current_user.img_id}')[0][3]
+    return app.response_class(img_data, mimetype='application/octet-stream')
