@@ -108,5 +108,9 @@ def account():
 
 @app.route("/getImage/<int:img_id>", methods=['GET', 'POST'])
 def getImage(img_id):
-    img_data = User_image().retrieve('img_data', f'img_id = {current_user.img_id}')[0][3]
-    return app.response_class(img_data, mimetype='application/octet-stream')
+    img_data = User_image().retrieve('*', f"img_id = {img_id}")
+    if img_data:
+        image = User_image(img_id=img_data[0][0], filename=None,
+                            extension=img_data[0][2], img_data=img_data[0][3],
+                            date_uploaded=img_data[0][4])
+    return app.response_class(image.img_data, mimetype='application/octet-stream')
