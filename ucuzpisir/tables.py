@@ -18,8 +18,11 @@ def load_user(user_id):
 
 
 class Base:
-    def __init__(self):
-        self.connection_url = app.config["DATABASE_URI"]
+    def __init__(self, url=None):
+        if url:
+            self.connection_url = url
+        else:
+            self.connection_url = app.config["DATABASE_URI"]
 
     def create(self):
         pass
@@ -111,12 +114,13 @@ class Recipe(Base):
 
 
 class User_image(Base):
-    def __init__(self, img_id = None, filename = None, extension = None, img_data = None,
+    def __init__(self, url = None, img_id = None, filename = None, extension = None, img_data = None,
                  date_uploaded = None):
+        super(User_image, self).__init__(url = url)
         self.img_id = img_id
         self.filename = filename
-        self.extension = extension 
-        self.img_data = img_data 
+        self.extension = extension
+        self.img_data = img_data
         self.date_uploaded = date_uploaded
     def __repr__(self):
         return f"Post('{self.filename}', '{self.date_uploaded}')"
@@ -124,7 +128,7 @@ class User_image(Base):
     def create(self):
         statement = f"""
         insert into user_images (filename, extension, img_data)
-        values ('{self.filename}', '{self.extension}', '{self.img_data}')
+        values ('{self.filename}', '{self.extension}', {self.img_data})
         """
         self.execute(statement)
 

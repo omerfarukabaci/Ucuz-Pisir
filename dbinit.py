@@ -1,6 +1,7 @@
 import os
 import sys
 import psycopg2 as dbapi2
+from ucuzpisir.tables import User_image
 
 INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS USER_IMAGES(
@@ -17,7 +18,7 @@ INIT_STATEMENTS = [
         USERNAME VARCHAR(50) UNIQUE NOT NULL,
         PASSWORD VARCHAR(70) NOT NULL,
         EMAIL VARCHAR(80) UNIQUE NOT NULL,
-        BIRTHDATE DATE
+        BIRTHDATE DATE,
         IMG_ID INTEGER REFERENCES USER_IMAGES(IMG_ID) DEFAULT 1
     )
     """,
@@ -38,6 +39,13 @@ def initialize(url):
         for statement in INIT_STATEMENTS:
             cursor.execute(statement)
         cursor.close()
+    insertDefaultImage(url)
+
+def insertDefaultImage(url):
+    imageData = open('ucuzpisir/static/imgs/default_user.jpg', 'rb').read()
+    defaultImage = User_image(url = url, filename='default', extension='jpg',
+                            img_data=imageData)
+    defaultImage.create()
 
 
 if __name__ == "__main__":
