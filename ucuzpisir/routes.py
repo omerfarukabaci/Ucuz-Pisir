@@ -90,10 +90,10 @@ def logout():
 def account():
     form = AccountUpdateForm()
     if form.validate_on_submit():
-        if form.picture:
+        if form.picture.data:
             random_hex = secrets.token_hex(8)
             _, f_ext = path.splitext(form.picture.data.filename)
-            f_ext = f_ext[1,]
+            f_ext = f_ext[1:]
             if f_ext == 'jpg':
                 f_ext = 'jpeg'
             image = User_image(filename=random_hex, extension=f_ext, img_data=form.picture.data)
@@ -112,12 +112,12 @@ def account():
         form.name.data = current_user.name
         form.email.data = current_user.email
         form.birthdate.data = current_user.birthdate
-        image_path = url_for('getImage', img_id=current_user.img_id)
+    image_path = url_for('getImage', img_id=current_user.img_id)
     return render_template('account.html', title='Account',
                            image_path=image_path, form=form)
 
 
-@app.route("/getImage/<int:img_id>", methods=['GET'])
+@app.route("/getImage/<int:img_id>", methods=['GET', 'POST'])
 def getImage(img_id):
     img_data = User_image().retrieve('*', f"img_id = {img_id}")
     if img_data:
