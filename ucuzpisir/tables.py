@@ -4,6 +4,7 @@ from datetime import datetime
 from flask import current_app as app
 from ucuzpisir import login_manager
 from flask_login import UserMixin
+from PIL import Image
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -120,6 +121,10 @@ class User_image(Base):
         self.img_id = img_id
         self.filename = filename
         self.extension = extension
+        img = Image.open(img_data)
+        img.thumbnail((125, 125))
+        self.img_data = img.getdata()
+        dbapi2.Binary(img_data)
         self.img_data = img_data
         self.date_uploaded = date_uploaded
     def __repr__(self):
