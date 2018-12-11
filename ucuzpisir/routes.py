@@ -93,7 +93,8 @@ def account():
         if form.picture:
             random_hex = secrets.token_hex(8)
             _, f_ext = path.splitext(form.picture.data.filename)
-            if f_ext == '.jpg':
+            f_ext = f_ext[1,]
+            if f_ext == 'jpg':
                 f_ext = 'jpeg'
             image = User_image(filename=random_hex, extension=f_ext, img_data=form.picture.data)
             image.create()
@@ -116,7 +117,7 @@ def account():
                            image_path=image_path, form=form)
 
 
-@app.route("/getImage/<int:img_id>", methods=['GET', 'POST'])
+@app.route("/getImage/<int:img_id>", methods=['GET'])
 def getImage(img_id):
     img_data = User_image().retrieve('*', f"img_id = {img_id}")
     if img_data:
