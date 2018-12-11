@@ -57,7 +57,7 @@ def login():
         userData = User().retrieve('*', f"email = '{form.email.data}'")
         if userData:
             user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2], password=userData[0][3],
-                        email=userData[0][4], img_id=userData[0][5], birthdate=userData[0][6])
+                        email=userData[0][4], birthdate=userData[0][5], img_id=userData[0][6])
         else:
             user = None
 

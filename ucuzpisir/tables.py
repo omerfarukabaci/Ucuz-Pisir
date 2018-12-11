@@ -14,7 +14,7 @@ def load_user(user_id):
     if userData:
         user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2],
                     password=userData[0][3], email=userData[0][4],
-                    img_id=userData[0][5], birthdate=userData[0][6])
+                     birthdate=userData[0][5], img_id=userData[0][6])
     else:
         user = None
     return user
