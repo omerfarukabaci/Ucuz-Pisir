@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import current_app as app
 from ucuzpisir import login_manager
 from flask_login import UserMixin
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ExifTags
 
 
 @login_manager.user_loader
@@ -165,7 +165,22 @@ class User_image(Base):
         if self.filename == None:
             return
         img = Image.open(self.img_data)
-        thumb = ImageOps.fit(img, size, Image.ANTIALIAS)
+        img = correctImageRotation(img)
+        img = ImageOps.fit(img, size, Image.ANTIALIAS)
         output = io.BytesIO()
-        thumb.save(output, format=self.extension)
+        img.save(output, format=self.extension)
         self.img_data = output.getvalue()
+
+def correctImageRotation(image):
+    if hasattr(image, '_getexif'):
+        for orientation in ExifTags.TAGS.keys(): 
+            if ExifTags.TAGS[orientation]=='Orientation':
+                break 
+        exifData = image._getexif()
+        if exifData is not None:
+            exif=dict(exifData.items())
+            orientation = exif[orientation] 
+            if orientation == 3:   image = image.transpose(Image.ROTATE_180)
+            elif orientation == 6: image = image.transpose(Image.ROTATE_270)
+            elif orientation == 8: image = image.transpose(Image.ROTATE_90)
+    return image
