@@ -46,7 +46,7 @@ class Base:
 class User(Base, UserMixin):
 
     def __init__(self, user_id=None, name=None, username=None,
-                 email=None, password=None, birthdate=None, pic="default_user.jpg"):
+                 email=None, password=None, birthdate=None, img_id=1):
         super(User, self).__init__()  # check
         self.user_id = user_id
         self.name = name
@@ -54,16 +54,16 @@ class User(Base, UserMixin):
         self.email = email
         self.password = password
         self.birthdate = birthdate
-        self.pic = pic
+        self.img_id = img_id
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.pic}')"
 
     def create(self):
         statement = f"""
-        insert into users (name, username, password, email, pic, birthdate)
+        insert into users (name, username, password, email, img_id, birthdate)
         values ('{self.name}', '{self.username}', '{self.password}', '{self.email}',
-        '{self.pic}', '{self.birthdate}')
+        '{self.img_id}', '{self.birthdate}')
         """
         self.execute(statement)
 
@@ -71,7 +71,7 @@ class User(Base, UserMixin):
         statement = f"""
         update users 
         set name ='{self.name}', username='{self.username}', email='{self.email}',
-        pic='{self.pic}', birthdate='{self.birthdate}'
+        img_id='{self.img_id}', birthdate='{self.birthdate}'
         where user_id = {self.user_id}
         """
         self.execute(statement)
@@ -112,20 +112,19 @@ class Recipe(Base):
 
 class User_image(Base):
     def __init__(self, img_id = None, filename = None, extension = None, img_data = None,
-                 date_uploaded = None, user_id = None):
+                 date_uploaded = None):
         self.img_id = img_id
         self.filename = filename
         self.extension = extension 
         self.img_data = img_data 
         self.date_uploaded = date_uploaded
-        self.user_id = user_id
     def __repr__(self):
         return f"Post('{self.filename}', '{self.date_uploaded}')"
 
     def create(self):
         statement = f"""
-        insert into user_images (filename, extension, img_data, user_id)
-        values ('{self.filename}', '{self.extension}', '{self.img_data}', {self.user_id})
+        insert into user_images (filename, extension, img_data)
+        values ('{self.filename}', '{self.extension}', '{self.img_data}')
         """
         self.execute(statement)
 
@@ -133,7 +132,7 @@ class User_image(Base):
         statement = f"""
         update user_images 
         set filename ='{self.filename}', extension='{self.extension}', img_data='{self.img_data}'
-        where user_id = {self.user_id}
+        where img_id = {self.img_id}
         """
         self.execute(statement)
 
