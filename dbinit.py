@@ -42,10 +42,11 @@ def initialize(url):
     insertDefaultImage(url)
 
 def insertDefaultImage(url):
-    imageData = open('ucuzpisir/static/imgs/default_user.jpg', 'rb').read()
-    defaultImage = User_image(url = url, filename='default', extension='jpg',
+    with open('ucuzpisir/static/imgs/default_user.jpg', 'rb') as f:
+        imageData = f.read()
+        defaultImage = User_image(url = url, filename='default', extension='jpg',
                             img_data=imageData)
-    defaultImage.create()
+        defaultImage.create()
 
 
 if __name__ == "__main__":
