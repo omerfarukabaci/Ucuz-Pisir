@@ -121,11 +121,8 @@ class User_image(Base):
         self.img_id = img_id
         self.filename = filename
         self.extension = extension
-        img = Image.open(img_data)
-        img.thumbnail((125, 125))
-        self.img_data = img.getdata()
-        dbapi2.Binary(img_data)
         self.img_data = img_data
+        self.shrinkImage()
         self.date_uploaded = date_uploaded
     def __repr__(self):
         return f"Post('{self.filename}', '{self.date_uploaded}')"
@@ -159,3 +156,9 @@ class User_image(Base):
         temp
         """
         self.execute(statement)
+
+    def shrinkImage(self, size=[125, 125]):
+        img = Image.open(img_data)
+        img.thumbnail((125, 125))
+        self.img_data = img.getdata()
+        dbapi2.Binary(img_data)
