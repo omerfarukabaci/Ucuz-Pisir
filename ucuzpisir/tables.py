@@ -162,6 +162,8 @@ class User_image(Base):
         self.execute(statement)
 
     def shrinkImage(self, size=(125, 125)):
+        if self.img_data == None:
+            return
         img = Image.open(self.img_data)
         img.thumbnail(size)
         output = io.BytesIO()
