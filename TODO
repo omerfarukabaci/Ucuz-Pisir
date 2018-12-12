@@ -49,10 +49,10 @@ Video 8 posts, update, delete:
 	✔ add import  postform to routes.py @done(18-12-12 20:50)
 	☐ Add to layout template:
 		☐ if user auth'd link: create post
-	☐ remove dummy recipes? @ömer
-	☐ add to home(): @ömer
-		☐ posts = Post.querry.all()
-	☐ Change home template:
+	✔ remove dummy recipes? @ömer @done(18-12-12 21:48)
+	✔ add to home(): @ömer @done(18-12-12 21:48)
+		✔ posts = Post.querry.all() @done(18-12-12 21:48)
+	✔ Change home template: @done(18-12-12 21:49)
 		☐ ?
 		☐ Add link for posts:
 			☐ url_for(post, post_id=post_id)
@@ -107,7 +107,7 @@ Video 8 posts, update, delete:
 	Not coverd on video:
 		✔ New table: posts / recipes @done(18-12-12 18:59)
 			✔ It already exitst? Its recipes @done(18-12-12 18:59)
-			☐ Add functionally to query all
+			✔ Add functionally to query all @done(18-12-12 21:50)
 			☐ add parameter four04 = None:
 				☐ if 404:
 					☐ add return 404 if it doesnt exists
