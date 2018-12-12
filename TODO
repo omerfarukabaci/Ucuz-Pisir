@@ -136,7 +136,7 @@ Video 8 posts, update, delete:
 			✔ Git add default recipe_image @done(18-12-12 20:15)
 				We will use this at dbinit.py when init'ing the default images
 					(like we did with the default user image)
-	☐ remove dummy recipes?
-	☐ add to home():
-		☐ posts = Post.querry.all()
+	✔ remove dummy recipes? @done(18-12-12 21:47)
+	✔ add to home(): @done(18-12-12 21:47)
+		✔ posts = Post.querry.all() @done(18-12-12 21:47)
 		
