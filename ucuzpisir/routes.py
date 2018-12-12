@@ -156,4 +156,5 @@ def recipe(recipe_id):
               'alert alert-danger alert-dismissible fade show')
         return redirect("home"), 404
     image_path = url_for('getRecipeImage', img_id=recipe.img_id)
-    return render_template('recipe.html', title=recipe.title, image_path=image_path)
+    return render_template('recipe.html', title=recipe.title,
+                           image_path=image_path, author_username=author_username)

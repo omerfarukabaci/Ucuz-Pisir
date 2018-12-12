@@ -24,7 +24,7 @@ Unorganized:
 After the project deadline todos:
 	☐ Default image for different kind of recipes: ex: burger, pasta, desert etc
 	☐ Polish the 404 page, add an image etc 
-	
+
 Video 8 posts, update, delete:
 	✔ New route: "/post/new": @done(18-12-12 19:16)
 		✔ @loginrequired @done(18-12-12 19:16)
@@ -60,14 +60,14 @@ Video 8 posts, update, delete:
 	✔ New route: "/post/<post_id>" @berkan @done(18-12-12 22:15)
 		✔ def post(post_id) :@berkan @done(18-12-12 22:15)
 			✔ post = Post.query.get_or_404(post_id)@berkan @done(18-12-12 22:15)
-	☐ Create custom 404 page @berkan
-		☐ Add error handler to routes
+	✔ Create custom 404 page @berkan @done(18-12-12 22:27)
+		✔ Add error handler to routes @done(18-12-12 22:27)
 
 	☐ Add new template post.html: @berkan
-		☐ Copy from home @berkan
+		✔ Copy from home @berkan @done(18-12-12 22:27)
 			☐ remove link of post @berkan
 		☐ Add inside div article metadata: @berkan
-			☐ if post.author == current_user: @berkan
+			✔ if post.author == current_user: @berkan @done(18-12-12 22:34)
 				☐ div @berkan
 					☐ a href link, url_for(update_post, post_id = post.id), Update @berkan
 					☐ button type button, class btn btn-danger btn-sm m1, delete @berkan
@@ -125,6 +125,11 @@ Video 8 posts, update, delete:
 			We will use this at dbinit.py when init'ing the default images
 				(like we did with the default user image)
 		✔ Add getRecipeImage function and route @done(18-12-12 19:05)
+		☐ recipe/<recipe_id> route:
+			☐ change the route to recipe/<recipe_title>
+		☐ Change to database:
+			☐ Recipe:
+				☐ recipe_title has to be unique
 	Ömer:
 		Not coverd on video:
 			✔ New table: posts / recipes @done(18-12-12 18:59)
