@@ -10,13 +10,7 @@ from PIL import Image, ImageOps, ExifTags
 
 @login_manager.user_loader
 def load_user(user_id):
-    userData = User().retrieve('*', f"user_id = {user_id}")
-    if userData:
-        user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2],
-                    password=userData[0][3], email=userData[0][4],
-                     birthdate=userData[0][5], img_id=userData[0][6])
-    else:
-        user = None
+    user = User().retrieve('*', f"user_id = {user_id}")[0]
     return user
 
 
@@ -237,9 +231,8 @@ class User_image(ImageBase):
         imageDatas = self.execute(statement, fetch=True)
         images = []
         for imageData in imageDatas:
-            image = User_image(img_id=img_data[0], filename=img_data[1],
-                    extension=img_data[2], img_data=img_data[3],
-                    date_uploaded=img_data[4])
+            image = User_image(img_id=imageData[0], extension=imageData[2],
+            img_data=imageData[3], date_uploaded=imageData[4])
             images.append(image)
 
         return images
@@ -283,10 +276,11 @@ class Recipe_image(ImageBase):
             where {condition}
             """
         imageDatas = self.execute(statement, fetch=True)
+        images = []
         for imageData in imageDatas:
-            image = Recipe_image(img_id=img_data[0], filename=img_data[1],
-                    extension=img_data[2], img_data=img_data[3],
-                    date_uploaded=img_data[4])
+            image = Recipe_image(img_id=imageData[0], filename=None,
+                    extension=imageData[2], img_data=imageData[3],
+                    date_uploaded=imageData[4])
             images.append(image)
 
         return images
