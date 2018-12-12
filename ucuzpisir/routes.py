@@ -165,7 +165,7 @@ def createRecipe():
               'alert alert-success alert-dismissible fade show')
         return redirect(url_for('home'))
     return render_template('create_recipe.html', title='Create new recipe',
-                           form=form)
+                           form=form, legend='Tarif Oluştur')
 
 
 @app.route("/recipe/<int:recipe_id>", methods=['GET'])
@@ -182,3 +182,37 @@ def recipe(recipe_id):
     author = User().retrieve("*", f"user_id = {recipe.author_id}")[0]
     return render_template('recipe.html', title=recipe.title, recipe=recipe,
                            image_path=image_path, author_username=author.username)
+
+@app.route("/recipe/<int:recipe_id>/update", methods=['GET', 'POST'])
+@login_required
+def update_recipe(recipe_id):
+    recipes = Recipe().retrieve("*", f"recipe_id = {recipe_id}")
+    if recipes:
+        recipe = recipes[0]
+    else:
+        flash(f"Recipe you are looking for doesn't exist, sorry :(",
+              'alert alert-danger alert-dismissible fade show')
+        return redirect(url_for('home')), 404
+    
+    if recipe.author_id != current_user.user_id:
+        flash(f"You are not supposed to be here, sorry. :(",
+              'alert alert-danger alert-dismissible fade show')
+        return redirect(url_for('home')), 404
+
+    form = RecipeForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            if recipe.img_id != 1:
+                Recipe_image().delete(img_id=recipe.img_id)
+            recipe.img_id = createNewImage(form.picture.data, "Recipe")
+        recipe.title = form.title.data
+        recipe.content = form.content.data
+        recipe.update()
+        flash('Your recipe has been updated!',
+        'alert alert-success alert-dismissible fade show')
+        return redirect(url_for('recipe', recipe_id=recipe.recipe_id))
+    elif request.method == 'GET':
+        form.title.data = recipe.title
+        form.content.data = recipe.content
+    return render_template('create_recipe.html', title='Update Recipe',
+                           form=form, legend='Update Recipe')
