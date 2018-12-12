@@ -216,3 +216,23 @@ def update_recipe(recipe_id):
         form.content.data = recipe.content
     return render_template('create_recipe.html', title='Update Recipe',
                            form=form, legend='Update Recipe')
+
+@app.route("/recipe/<int:recipe_id>/delete", methods=['POST','GET'])
+@login_required
+def delete_recipe(recipe_id):
+    recipes = Recipe().retrieve("*", f"recipe_id = {recipe_id}")
+    if recipes:
+        recipe = recipes[0]
+    else:
+        flash(f"Recipe you are looking for doesn't exist, sorry :(",
+              'alert alert-danger alert-dismissible fade show')
+        return redirect(url_for('home')), 404
+    
+    if recipe.author_id != current_user.user_id:
+        flash(f"You are not supposed to be here, sorry. :(",
+              'alert alert-danger alert-dismissible fade show')
+        return redirect(url_for('home')), 404
+
+    recipe.delete()
+    flash('Your recipe has been deleted!', 'alert alert-success alert-dismissible fade show')
+    return redirect(url_for('home'))
