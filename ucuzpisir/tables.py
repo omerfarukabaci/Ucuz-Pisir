@@ -147,7 +147,7 @@ class Recipe(Base):
 
 
     def __repr__(self):
-        return f"Post('{self.title}', '{self.date_posted}')"
+        return f"Recipe('{self.title}', '{self.date_posted}')"
 
 
 class ImageBase(Base):
