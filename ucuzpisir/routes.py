@@ -162,3 +162,15 @@ def createRecipe():
         return redirect(url_for('home'))
     return render_template('create_recipe.html', title='Create new recipe',
                            form=form)
+
+
+@app.route("/recipe/<int:recipe_id>", methods=['GET'])
+def recipe(recipe_id):
+    recipeData = Recipe().retrieve("*", f"recipe_id = {recipe_id}")[0]
+    if recipeData:
+        recipe = Recipe(recipe_id=recipeData[0], title=recipeData[1], content=recipeData[2],
+                        date_posted=recipeData[3], img_id=recipeData[4], author_id=recipeData[5])
+    else:
+        return redirect("home"), 404
+    image_path = url_for('getRecipeImage', img_id=recipe.img_id)
+    return render_template('recipe.html', title=recipe.title, image_path=image_path)
