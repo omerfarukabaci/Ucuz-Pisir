@@ -3,8 +3,8 @@ import secrets
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from ucuzpisir import app, bcrypt
-from ucuzpisir.forms import RegistrationForm, LoginForm, AccountUpdateForm
-from ucuzpisir.tables import Base, User, User_image
+from ucuzpisir.forms import RegistrationForm, LoginForm, AccountUpdateForm, RecipeForm
+from ucuzpisir.tables import Base, User, User_image, Recipe, Recipe_image
 
 recipes = [
     {
@@ -158,11 +158,11 @@ def getRecipeImage(img_id):
 def createRecipe():
     form = RecipeForm()
     if form.validate_on_submit():
-        recipe_image_id = None
+        recipe_image_id = 1
         if form.picture.data:
-            recipe_image_id = createNewImage(form.picture.data)
-        recipe = Recipe(title = form.content.data, content = form.content.data,
-                        author = current_user.user_id, recipe_img = recipe_image_id)
+            recipe_image_id = createNewImage(form.picture.data, "Recipe")
+        recipe = Recipe(title = form.title.data, content = form.content.data,
+                        author_id = current_user.user_id, img_id = recipe_image_id)
         recipe.create() 
         flash(f'Account updated!',
               'alert alert-success alert-dismissible fade show')
