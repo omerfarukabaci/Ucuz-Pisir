@@ -114,12 +114,12 @@ class Recipe(Base):
         self.img_id = img_id
     
     def create(self):
-    statement = f"""
-    insert into recipes (title, content, date_posted, img_id, author_id)
-    values ('{self.title}', '{self.content}', '{self.date_posted}', '{self.img_id}',
-    '{self.author_id}')
-    """
-    self.execute(statement)
+        statement = f"""
+        insert into recipes (title, content, date_posted, img_id, author_id)
+        values ('{self.title}', '{self.content}', '{self.date_posted}', '{self.img_id}',
+        '{self.author_id}')
+        """
+        self.execute(statement)
 
     def update(self):
         statement = f"""
