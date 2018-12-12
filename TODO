@@ -95,8 +95,8 @@ Video 8 posts, update, delete:
 		☐ retrun redirect(home)
 	☐ Import abort at routes.py
 	Not coverd on video:
-		☐ New table: posts / recipes
-			☐ It already exitst? Its recipes
+		✔ New table: posts / recipes @done(18-12-12 18:59)
+			✔ It already exitst? Its recipes @done(18-12-12 18:59)
 			☐ Add functionally to query all
 			☐ add parameter four04 = None:
 				☐ if 404:
@@ -110,8 +110,8 @@ Video 8 posts, update, delete:
 
 	Ömer:
 		Not coverd on video:
-			☐ New table: posts / recipes
-				☐ It already exitst? Its recipes
+			✔ New table: posts / recipes @done(18-12-12 18:59)
+				✔ It already exitst? Its recipes @done(18-12-12 18:59)
 				☐ Add functionally to query all
 				☐ add parameter four04 = None:
 					☐ if 404:
