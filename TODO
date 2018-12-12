@@ -23,7 +23,8 @@ Unorganized:
 
 After the project deadline todos:
 	☐ Default image for different kind of recipes: ex: burger, pasta, desert etc
-
+	☐ Polish the 404 page, add an image etc 
+	
 Video 8 posts, update, delete:
 	✔ New route: "/post/new": @done(18-12-12 19:16)
 		✔ @loginrequired @done(18-12-12 19:16)

@@ -7,6 +7,11 @@ from ucuzpisir.forms import RegistrationForm, LoginForm, AccountUpdateForm, Reci
 from ucuzpisir.tables import Base, User, User_image, Recipe, Recipe_image
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
 @app.route("/")
 @app.route("/home")
 def home():
