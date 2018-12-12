@@ -15,10 +15,10 @@ Unorganized:
 	✔ Wrap update profile picture with a function @berkan @done(18-12-12 19:47)
 	☐ Rename picture as image on whole project
 		It is inconsistent with rest of the project, some images are randomly named as picture
-	☐ Add new validator to posts:
-		☐ Content minimum character: 100?
-		☐ Title minimum character: 8
-		☐ Title maximum character: 50
+	✔ Add new validator to posts: @done(18-12-12 20:20)
+		✔ Content minimum character: 100? @done(18-12-12 20:20)
+		✔ Title minimum character: 8 @done(18-12-12 20:17)
+		✔ Title maximum character: 50 @done(18-12-12 20:17)
 
 After the project deadline todos:
 	☐ Default image for different kind of recipes: ex: burger, pasta, desert etc
@@ -26,20 +26,20 @@ After the project deadline todos:
 Video 8 posts, update, delete:
 	✔ New route: "/post/new": @done(18-12-12 19:16)
 		✔ @loginrequired @done(18-12-12 19:16)
-	☐ creat_post function:
+	✔ creat_post function: @done(18-12-12 20:21)
 		✔ create new form instance @done(18-12-12 19:19)
-			☐ send inside of render_temp as "form=form"
+			✔ send inside of render_temp as "form=form" @done(18-12-12 20:15)
 		✔ methods: get, post @done(18-12-12 19:18)
 		✔ if form.validate on submit: @done(18-12-12 19:26)
 			✔ flash: your post has been created @done(18-12-12 19:20)
 			✔ post = Post(title = x, content = form.content.data, author = z) @done(18-12-12 19:26)
 			✔ post.create() @done(18-12-12 19:26)
 			✔ return redirect url_for(home) @done(18-12-12 19:26)
-	☐ new form: class PostForm(flaskform):
-		☐ title stringfiled, validators: datareq
-		☐ add import textareafield to forms.py
-		☐ content textareafield, validators: datareq
-		☐ submit submitfield
+	✔ new form: class PostForm(flaskform): @done(18-12-12 20:21)
+		✔ title stringfiled, validators: datareq @done(18-12-12 20:20)
+		✔ add import textareafield to forms.py @done(18-12-12 20:20)
+		✔ content textareafield, validators: datareq @done(18-12-12 20:20)
+		✔ submit submitfield @done(18-12-12 20:20)
 	☐ new template: create_post:
 		☐ copy form from other template
 		☐ replace ? with title

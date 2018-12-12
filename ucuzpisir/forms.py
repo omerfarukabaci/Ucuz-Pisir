@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from ucuzpisir.tables import User
 from flask_login import current_user
@@ -69,3 +69,11 @@ class AccountUpdateForm(FlaskForm):
             if user:
                 raise ValidationError(
                     'That email is taken. Please choose a different one.')
+
+
+class RecipeForm(FlaskForm):
+    title = StringField('Title',
+                        validators=[DataRequired(), Length(min=8, max=50)])
+    content = TextAreaField('Recipe instructions',
+                            validators=[DataRequired(), Length(min=80)])
+    submit = SubmitField('Submit')
