@@ -12,40 +12,41 @@ Users:
 
 
 Unorganized:
-	☐ Wrap update profile picture with a function
+	☐ Wrap update profile picture with a function @berkan
 	☐ Add new validator to posts:
 		☐ Content minimum character: 100?
 		☐ Title minimum character: 8
 		☐ Title maximum character: 50
-		
+
 After the project deadline todos:
 	☐ Default image for different kind of recipes: ex: burger, pasta, desert etc
 
 Video 8 posts, update, delete:
-	☐ New route: "/post/new":
-		☐ @loginrequired
-	☐ new template: create_post :
-		☐ new form: class PostForm(flaskform):
-			☐ title stringfiled, validators: datareq
-			☐ add import textareafield to forms.py
-			☐ content textareafield, validators: datareq
-			☐ submit submitfield
+	✔ New route: "/post/new": @done(18-12-12 19:16)
+		✔ @loginrequired @done(18-12-12 19:16)
+	☐ creat_post function:
+		✔ create new form instance @done(18-12-12 19:19)
+			☐ send inside of render_temp as "form=form"
+		✔ methods: get, post @done(18-12-12 19:18)
+		✔ if form.validate on submit: @done(18-12-12 19:26)
+			✔ flash: your post has been created @done(18-12-12 19:20)
+			✔ post = Post(title = x, content = form.content.data, author = z) @done(18-12-12 19:26)
+			✔ post.create() @done(18-12-12 19:26)
+			✔ return redirect url_for(home) @done(18-12-12 19:26)
+	☐ new form: class PostForm(flaskform):
+		☐ title stringfiled, validators: datareq
+		☐ add import textareafield to forms.py
+		☐ content textareafield, validators: datareq
+		☐ submit submitfield
+	☐ new template: create_post:
 		☐ copy form from other template
 		☐ replace ? with title
 		☐ replace password with content
 		☐ delete forgot password
 	☐ add import  postform to routes.py
-	☐ creat_post function:
-		☐ create new form instance and send inside of render_temp as "form=form"
-		☐ methods: get, post
-		☐ if form.validate ons submit:
-			☐ flash: your post has been created
-			☐ post = Post(title = x, content = form.content.data, author = z)
-			☐ post.create()
-			☐ return redirect url_for(home)
 	☐ Add to layout template:
 		☐ if user auth'd link: create post
-	☐ remove dummy recipes?
+	☐ remove dummy recipes? @ömer
 	☐ add to home(): @ömer
 		☐ posts = Post.querry.all()
 	☐ Change home template:
@@ -116,6 +117,7 @@ Video 8 posts, update, delete:
 		☐ Git add default recipe_image
 			We will use this at dbinit.py when init'ing the default images
 				(like we did with the default user image)
+		✔ Add getRecipeImage function and route @done(18-12-12 19:05)
 	Ömer:
 		Not coverd on video:
 			✔ New table: posts / recipes @done(18-12-12 18:59)
@@ -129,6 +131,8 @@ Video 8 posts, update, delete:
 			☐ Add to dbinit:
 				☐ intializing dummy recipes
 			☐ Git add default recipe_image
+				We will use this at dbinit.py when init'ing the default images
+					(like we did with the default user image)
 	☐ remove dummy recipes?
 	☐ add to home():
 		☐ posts = Post.querry.all()
