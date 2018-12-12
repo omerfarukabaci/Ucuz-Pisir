@@ -29,13 +29,14 @@ Video 8 posts, update, delete:
 		☐ replace password with content
 		☐ delete forgot password
 	☐ add import  postform to routes.py
-	☐ create new form instance and send inside of render_temp as "form=form"
-	☐ methods: get, post
-	☐ if form.validate ons submit:
-		☐ flash: your post has been created
-		☐ post = Post(title = x, content = form.content.data, author = z)
-		☐ post.create()
-		☐ return redirect url_for(home)
+	☐ creat_post function:
+		☐ create new form instance and send inside of render_temp as "form=form"
+		☐ methods: get, post
+		☐ if form.validate ons submit:
+			☐ flash: your post has been created
+			☐ post = Post(title = x, content = form.content.data, author = z)
+			☐ post.create()
+			☐ return redirect url_for(home)
 	☐ Add to layout template:
 		☐ if user auth'd link: create post
 	☐ remove dummy recipes?
@@ -101,9 +102,10 @@ Video 8 posts, update, delete:
 				☐ if 404:
 					☐ add return 404 if it doesnt exists
 			☐ Add recipe_id as member to class
-				Since we will use it on route: "/recipe/<recipe_id>
+				Since we will use it on route: "/recipe/<recipe_id>"
 		☐ Our post form (add recipe):
 			☐ Add recipe imagei
-
 		☐ Add to dbinit:
 			☐ intializing dummy recipes
+
+	Ömer:
