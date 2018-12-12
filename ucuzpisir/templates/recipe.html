@@ -1,21 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
     <article class="media content-section">
-        <img class="card-img-top"
-            height="150px"
-            alt="{{ recipe.title }}"
-            src="{{ image_path }}">
-        <div class="media-body">
+        <img class = "rounded-circle" alt="{{ recipe.title }}" src="{{ image_path }}">
+        <div class="media-body w-50">
+            <h2 class="article-title">{{ recipe.title }}</h2>
             <div class="article-metadata">
-                <a class="mr-2" href="#">{{ author_username }}</a>
+                <a class="mx-2" href="#">{{ author_username }}</a>
                 <small class="text-muted">{{ recipe.date_posted.strftime('%d-%m-%Y') }}</small>
                 {% if recipe.author_id == current_user.user_id %}
-                    <h1>"This h1 element is temporary, placed just to test if logic works."</h1>
-                    
+                    <!--<h1>"logic works."</h1>-->     
                 {% endif %}
             </div>
-            <h2 class="article-title">{{ recipe.title }}</h2>
-            <p class="article-content">{{ recipe.content }}</p>
+            
+            <div class="w-75 ml-3 mt-2 border rounded recipe">
+                <div class="recipe-content center m-3">
+                    {{ recipe.content}}
+                </div>
+            </div>
         </div>
     </article>
     <!-- Modal -->

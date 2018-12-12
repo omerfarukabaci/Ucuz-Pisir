@@ -63,3 +63,12 @@ body {
     max-width: 200px;
     height: auto;
 }
+
+.recipe{
+    background-color: #ebbba5;
+}
+
+.recipe-content{
+    justify-self: center;
+    overflow-wrap: break-word;
+}
