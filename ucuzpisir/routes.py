@@ -171,6 +171,8 @@ def recipe(recipe_id):
         recipe = Recipe(recipe_id=recipeData[0], title=recipeData[1], content=recipeData[2],
                         date_posted=recipeData[3], img_id=recipeData[4], author_id=recipeData[5])
     else:
+        flash(f"Recipe you are looking for doesn't exist, sorry :(",
+              'alert alert-danger alert-dismissible fade show')
         return redirect("home"), 404
     image_path = url_for('getRecipeImage', img_id=recipe.img_id)
     return render_template('recipe.html', title=recipe.title, image_path=image_path)

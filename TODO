@@ -59,9 +59,9 @@ Video 8 posts, update, delete:
 	✔ New route: "/post/<post_id>" @berkan @done(18-12-12 22:15)
 		✔ def post(post_id) :@berkan @done(18-12-12 22:15)
 			✔ post = Post.query.get_or_404(post_id)@berkan @done(18-12-12 22:15)
-	☐ Create cutom 404 page @berkan
+	☐ Create custom 404 page @berkan
 		☐ Add error handler to routes
-		
+
 	☐ Add new template post.html: @berkan
 		☐ Copy from home @berkan
 			☐ remove link of post @berkan
