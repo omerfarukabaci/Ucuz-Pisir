@@ -77,7 +77,7 @@ class User(Base, UserMixin):
         statement = f"""
         update users 
         set name ='{self.name}', username='{self.username}', email='{self.email}',
-        img_id='{self.img_id}', birthdate='{self.birthdate}'
+        img_id={self.img_id}, birthdate='{self.birthdate}'
         where user_id = {self.user_id}
         """
         self.execute(statement)
@@ -112,7 +112,39 @@ class Recipe(Base):
         self.date_posted = date_posted
         self.author_id = author_id
         self.img_id = img_id
-    #necessary functions will be written below
+    
+    def create(self):
+    statement = f"""
+    insert into recipes (title, content, date_posted, img_id, author_id)
+    values ('{self.title}', '{self.content}', '{self.date_posted}', '{self.img_id}',
+    '{self.author_id}')
+    """
+    self.execute(statement)
+
+    def update(self):
+        statement = f"""
+        update recipes 
+        set title ='{self.title}', content='{self.content}', img_id={self.img_id}'
+        where recipe_id = {self.recipe_id}
+        """
+        self.execute(statement)
+
+    def retrieve(self, queryKey, condition=None):
+        statement = f"""
+        select {queryKey} from recipes"""
+        if (condition):
+            statement += f""" 
+            where {condition}
+            """
+        return self.execute(statement, fetch=True)
+
+    def delete(self):
+        statement = f"""
+        delete from recipes
+        where recipe_id = {self.recipe_id}
+        """
+        self.execute(statement)
+
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"

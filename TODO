@@ -124,7 +124,7 @@ Video 8 posts, update, delete:
 		Not coverd on video:
 			✔ New table: posts / recipes @done(18-12-12 18:59)
 				✔ It already exitst? Its recipes @done(18-12-12 18:59)
-				☐ Add functionally to query all
+				✔ Add functionally to query all @done(18-12-12 20:30)
 				☐ add parameter four04 = None:
 					☐ if 404:
 						☐ add return 404 if it doesnt exists
