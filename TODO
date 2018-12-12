@@ -40,12 +40,12 @@ Video 8 posts, update, delete:
 		✔ add import textareafield to forms.py @done(18-12-12 20:20)
 		✔ content textareafield, validators: datareq @done(18-12-12 20:20)
 		✔ submit submitfield @done(18-12-12 20:20)
-	☐ new template: create_post:
+	✔ new template: create_post: @done(18-12-12 20:49)
 		✔ copy form from other template @done(18-12-12 20:46)
-		☐ replace ? with title
-		☐ replace password with content
-		☐ delete forgot password
-	☐ add import  postform to routes.py
+		✔ replace ? with title @done(18-12-12 20:49)
+		✔ replace password with content @done(18-12-12 20:49)
+		✔ delete forgot password @done(18-12-12 20:49)
+	✔ add import  postform to routes.py @done(18-12-12 20:50)
 	☐ Add to layout template:
 		☐ if user auth'd link: create post
 	☐ remove dummy recipes? @ömer
