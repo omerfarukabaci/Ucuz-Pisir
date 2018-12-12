@@ -13,7 +13,10 @@ Users:
 
 Unorganized:
 	☐ Wrap update profile picture with a function
-
+	☐ Add new validator to posts:
+		☐ Content minimum character: 100?
+		☐ Title minimum character: 8
+		☐ Title maximum character: 50
 
 Video 8 posts, update, delete:
 	☐ New route: "/post/new":
@@ -107,7 +110,9 @@ Video 8 posts, update, delete:
 			☐ Add recipe image
 		☐ Add to dbinit:
 			☐ intializing dummy recipes
-
+		☐ Git add default recipe_image
+			We will use this at dbinit.py when init'ing the default images
+				(like we did with the default user image)
 	Ömer:
 		Not coverd on video:
 			☐ New table: posts / recipes
@@ -120,6 +125,7 @@ Video 8 posts, update, delete:
 				Since we will use it on route: "/recipe/<recipe_id>"
 			☐ Add to dbinit:
 				☐ intializing dummy recipes
+			☐ Git add default recipe_image
 	☐ remove dummy recipes?
 	☐ add to home():
 		☐ posts = Post.querry.all()
