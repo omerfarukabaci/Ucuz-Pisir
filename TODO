@@ -110,13 +110,13 @@ Video 8 posts, update, delete:
 			☐ add parameter four04 = None:
 				☐ if 404:
 					☐ add return 404 if it doesnt exists
-			☐ Add recipe_id as member to class
+			✔ Add recipe_id as member to class @done(18-12-12 20:16)
 				Since we will use it on route: "/recipe/<recipe_id>"
 		☐ Our post form (add recipe): @berkan
 			☐ Add recipe image
-		☐ Add to dbinit:
-			☐ intializing dummy recipes
-		☐ Git add default recipe_image
+		✘ Add to dbinit: @cancelled(18-12-12 20:16)
+			✘ intializing dummy recipes @cancelled(18-12-12 20:16)
+		✔ Git add default recipe_image @done(18-12-12 20:16)
 			We will use this at dbinit.py when init'ing the default images
 				(like we did with the default user image)
 		✔ Add getRecipeImage function and route @done(18-12-12 19:05)
@@ -128,11 +128,11 @@ Video 8 posts, update, delete:
 				☐ add parameter four04 = None:
 					☐ if 404:
 						☐ add return 404 if it doesnt exists
-			☐ Add recipe_id as member to class
+			✔ Add recipe_id as member to class @done(18-12-12 20:15)
 				Since we will use it on route: "/recipe/<recipe_id>"
-			☐ Add to dbinit:
-				☐ intializing dummy recipes
-			☐ Git add default recipe_image
+			✘ Add to dbinit: @cancelled(18-12-12 20:15)
+				✘ intializing dummy recipes @cancelled(18-12-12 20:15)
+			✔ Git add default recipe_image @done(18-12-12 20:15)
 				We will use this at dbinit.py when init'ing the default images
 					(like we did with the default user image)
 	☐ remove dummy recipes?
