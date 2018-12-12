@@ -87,8 +87,8 @@ def logout():
 
 def createNewImage(form_picture_data, image_type):
     """
-    param form_picture_data: picture data from form
-    param image_type: type of the image, ex: user_image, recipe_image
+    param form_picture_data(image object): picture data from form
+    param image_type(string): type of the image, ex: user_image, recipe_image
     returns: id of the created image
     """
     random_hex = secrets.token_hex(8)
@@ -99,7 +99,7 @@ def createNewImage(form_picture_data, image_type):
     if image_type == "User":
         image = User_image(filename=random_hex,
                             extension=f_ext, img_data=form_picture_data)
-    else if image_type == "Recipe":
+    elif image_type == "Recipe":
         image = Recipe_image(filename=random_hex,
                             extension=f_ext, img_data=form_picture_data)
     image.create()
@@ -114,7 +114,7 @@ def account():
         if form.picture.data:
             if current_user.img_id != 1:
                 User_image().delete(img_id=current_user.img_id)
-            current_user.img_id = createNewImage(form.picture.data)
+            current_user.img_id = createNewImage(form.picture.data, "User")
         current_user.username = form.username.data
         current_user.name = form.name.data
         current_user.email = form.email.data
