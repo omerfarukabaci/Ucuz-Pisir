@@ -54,9 +54,9 @@ Video 8 posts, update, delete:
 	✔ add to home(): @ömer @done(18-12-12 21:48)
 		✔ posts = Post.querry.all() @done(18-12-12 21:48)
 	✔ Change home template: @done(18-12-12 21:49)
-		☐ ?
-		☐ Add link for posts:
-			☐ url_for(post, post_id=post_id)
+		✔ ? @done(18-12-13 00:27)
+		✔ Add link for posts: @done(18-12-13 00:27)
+			✔ url_for(post, post_id=post_id) @done(18-12-13 00:27)
 	✔ New route: "/post/<post_id>" @berkan @done(18-12-12 22:15)
 		✔ def post(post_id) :@berkan @done(18-12-12 22:15)
 			✔ post = Post.query.get_or_404(post_id)@berkan @done(18-12-12 22:15)
@@ -143,6 +143,6 @@ Video 8 posts, update, delete:
 			✔ New table: posts / recipes @done(18-12-12 18:59)
 				✔ It already exitst? Its recipes @done(18-12-12 18:59)
 				✔ Add functionally to query all @done(18-12-12 20:30)
-				☐ add parameter four04 = None:
-					☐ if 404:
-						☐ add return 404 if it doesnt exists
+				✔ add parameter four04 = None: @done(18-12-13 00:24)
+					✔ if 404: @done(18-12-13 00:24)
+						✔ add return 404 if it doesnt exists @done(18-12-13 00:24)
