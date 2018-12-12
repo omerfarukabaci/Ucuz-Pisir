@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+    <article class="media content-section">
+        <img class="card-img-top"
+            height="150px"
+            alt="{{ recipe.title }}"
+            src="{{ image_path )}}">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ recipe.author_id.username }}</a>
+                <small class="text-muted">{{ recipe.date_posted.strftime('%d-%m-%Y') }}</small>
+                {% if recipe.author_id == current_user.user_id %}
+                    <h1>"This h1 element is temporary, placed just to test if logic works."</h1>
+                    <!--- Uncomment this after fixing modal part
+                    <div>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                    </div>-->
+                {% endif %}
+            </div>
+            <h2 class="article-title">{{ recipe.title }}</h2>
+            <p class="article-content">{{ recipe.content }}</p>
+        </div>
+    </article>
+    <!-- Modal -->
+{% endblock content %}
