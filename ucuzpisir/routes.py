@@ -18,6 +18,7 @@ def home():
         recipes.append(recipe)
     return render_template('home.html', recipes=recipes)
 
+
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
@@ -75,6 +76,7 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+
 def createNewImage(form_picture_data, image_type):
     """
     param form_picture_data(image object): picture data from form
@@ -88,13 +90,14 @@ def createNewImage(form_picture_data, image_type):
         f_ext = 'jpeg'
     if image_type == "User":
         image = User_image(filename=random_hex,
-                            extension=f_ext, img_data=form_picture_data)
+                           extension=f_ext, img_data=form_picture_data)
     elif image_type == "Recipe":
         image = Recipe_image(filename=random_hex,
-                            extension=f_ext, img_data=form_picture_data)
+                             extension=f_ext, img_data=form_picture_data)
     image.create()
     image_id = image.retrieve('*', f"filename = '{random_hex}'")[0][0]
     return image_id
+
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
@@ -151,9 +154,9 @@ def createRecipe():
         recipe_image_id = 1
         if form.picture.data:
             recipe_image_id = createNewImage(form.picture.data, "Recipe")
-        recipe = Recipe(title = form.title.data, content = form.content.data,
-                        author_id = current_user.user_id, img_id = recipe_image_id)
-        recipe.create() 
+        recipe = Recipe(title=form.title.data, content=form.content.data,
+                        author_id=current_user.user_id, img_id=recipe_image_id)
+        recipe.create()
         flash(f'Account updated!',
               'alert alert-success alert-dismissible fade show')
         return redirect(url_for('home'))
