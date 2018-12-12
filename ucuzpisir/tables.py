@@ -284,7 +284,7 @@ class Recipe_image(ImageBase):
             """
         imageDatas = self.execute(statement, fetch=True)
         for imageData in imageDatas:
-            image = User_image(img_id=img_data[0], filename=img_data[1],
+            image = Recipe_image(img_id=img_data[0], filename=img_data[1],
                     extension=img_data[2], img_data=img_data[3],
                     date_uploaded=img_data[4])
             images.append(image)
