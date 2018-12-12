@@ -40,7 +40,7 @@ Video 8 posts, update, delete:
 	☐ Add to layout template:
 		☐ if user auth'd link: create post
 	☐ remove dummy recipes?
-	☐ add to home():
+	☐ add to home(): @ömer
 		☐ posts = Post.querry.all()
 	☐ Change home template:
 		☐ ?
@@ -103,9 +103,24 @@ Video 8 posts, update, delete:
 					☐ add return 404 if it doesnt exists
 			☐ Add recipe_id as member to class
 				Since we will use it on route: "/recipe/<recipe_id>"
-		☐ Our post form (add recipe):
-			☐ Add recipe imagei
+		☐ Our post form (add recipe): @berkan
+			☐ Add recipe image
 		☐ Add to dbinit:
 			☐ intializing dummy recipes
 
 	Ömer:
+		Not coverd on video:
+			☐ New table: posts / recipes
+				☐ It already exitst? Its recipes
+				☐ Add functionally to query all
+				☐ add parameter four04 = None:
+					☐ if 404:
+						☐ add return 404 if it doesnt exists
+			☐ Add recipe_id as member to class
+				Since we will use it on route: "/recipe/<recipe_id>"
+			☐ Add to dbinit:
+				☐ intializing dummy recipes
+	☐ remove dummy recipes?
+	☐ add to home():
+		☐ posts = Post.querry.all()
+		
