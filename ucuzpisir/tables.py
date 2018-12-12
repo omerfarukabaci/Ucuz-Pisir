@@ -194,3 +194,43 @@ class User_image(ImageBase):
         where img_id = {img_id}
         """
         self.execute(statement)
+
+class Recipe_image(ImageBase):
+    def __init__(self, url=None, img_id=None, filename=None, extension=None, img_data=None,
+                 date_uploaded=None):
+        super(Recipe_image, self).__init__(img_id=img_id, filename=filename,
+                                        extension=extension,img_data=img_data,
+                                        date_uploaded=date_uploaded, url=url)
+        self.reformatImage(size=(300, 300))
+
+    def create(self):
+        statement = f"""
+        insert into recipe_images (filename, extension, img_data)
+        values ('{self.filename}', '{self.extension}', {dbapi2.Binary(self.img_data)})
+        ON CONFLICT DO NOTHING
+        """
+        self.execute(statement)
+
+    def update(self):
+        statement = f"""
+        update recipe_images 
+        set filename ='{self.filename}', extension='{self.extension}', img_data='{self.img_data}'
+        where img_id = {self.img_id}
+        """
+        self.execute(statement)
+
+    def retrieve(self, queryKey, condition=None):
+        statement = f"""
+        select {queryKey} from recipe_images"""
+        if (condition):
+            statement += f""" 
+            where {condition}
+            """
+        return self.execute(statement, fetch=True)
+
+    def delete(self, img_id):
+        statement = f"""
+        delete from recipe_images
+        where img_id = {img_id}
+        """
+        self.execute(statement)
