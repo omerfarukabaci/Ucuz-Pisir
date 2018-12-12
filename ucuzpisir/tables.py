@@ -130,7 +130,7 @@ class Recipe(Base):
     def update(self):
         statement = f"""
         update recipes 
-        set title ='{self.title}', content='{self.content}', img_id={self.img_id}'
+        set title ='{self.title}', content='{self.content}', img_id={self.img_id}
         where recipe_id = {self.recipe_id}
         """
         self.execute(statement)
