@@ -17,6 +17,9 @@ Unorganized:
 		☐ Content minimum character: 100?
 		☐ Title minimum character: 8
 		☐ Title maximum character: 50
+		
+After the project deadline todos:
+	☐ Default image for different kind of recipes: ex: burger, pasta, desert etc
 
 Video 8 posts, update, delete:
 	☐ New route: "/post/new":
