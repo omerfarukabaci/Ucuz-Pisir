@@ -6,21 +6,6 @@ from ucuzpisir import app, bcrypt
 from ucuzpisir.forms import RegistrationForm, LoginForm, AccountUpdateForm, RecipeForm
 from ucuzpisir.tables import Base, User, User_image, Recipe, Recipe_image
 
-recipes = [
-    {
-        'title': 'Sushi',
-        'image_path': '1.jpg'
-    },
-    {
-        'title': 'Ratatouille',
-        'image_path': '2.jpg'
-    },
-    {
-        'title': 'Fish & Chips',
-        'image_path': '3.jpg'
-    }
-]
-
 
 @app.route("/")
 @app.route("/home")
