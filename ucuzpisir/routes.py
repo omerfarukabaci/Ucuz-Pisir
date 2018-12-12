@@ -86,7 +86,20 @@ def logout():
     return redirect(url_for('home'))
 
 def createNewImage(form_picture_data):
-    
+    """
+    param form_picture_data: picture data from form
+    returns: id of the created image
+    """
+    random_hex = secrets.token_hex(8)
+    _, f_ext = path.splitext(form_picture_data.filename)
+    f_ext = f_ext[1:]
+    if f_ext == 'jpg':
+        f_ext = 'jpeg'
+    image = User_image(filename=random_hex,
+                        extension=f_ext, img_data=form_picture_data)
+    image.create()
+    image_id = image.retrieve('*', f"filename = '{random_hex}'")[0][0]
+    return image_id
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
@@ -94,18 +107,9 @@ def account():
     form = AccountUpdateForm()
     if form.validate_on_submit():
         if form.picture.data:
-            random_hex = secrets.token_hex(8)
-            _, f_ext = path.splitext(form.picture.data.filename)
-            f_ext = f_ext[1:]
-            if f_ext == 'jpg':
-                f_ext = 'jpeg'
-            image = User_image(filename=random_hex,
-                               extension=f_ext, img_data=form.picture.data)
             if current_user.img_id != 1:
-                image.delete(img_id=current_user.img_id)
-            image.create()
-            current_user.img_id = image.retrieve(
-                '*', f"filename = '{random_hex}'")[0][0]
+                User_image().delete(img_id=current_user.img_id)
+            current_user.img_id = createNewImage(form.picture.data)
         current_user.username = form.username.data
         current_user.name = form.name.data
         current_user.email = form.email.data
