@@ -4,12 +4,106 @@ Html/Templates:
       ☐ Maybe move: about link from header to footer @started(18-11-07 17:17)
   ☐ recipe.html @started(18-12-04 21:24)
 
-Forms:
-  
-
 Gitignore:
   ☐ Check if docs/build ignore correct. @started(18-12-04 20:07)
 
 Users:
   ✔ Fix SQLalchemy parts inside custom validations of register @started(18-11-07 23:07) @done(18-12-09 23:01) @lasted(4w3d23h54m53s)
 
+
+Unorganized:
+	☐ Wrap update profile picture with a function
+
+
+Video 8 posts, update, delete:
+	☐ New route: "/post/new":
+		☐ @loginrequired
+	☐ new template: create_post :
+		☐ new form: class PostForm(flaskform):
+			☐ title stringfiled, validators: datareq
+			☐ add import textareafield to forms.py
+			☐ content textareafield, validators: datareq
+			☐ submit submitfield
+		☐ copy form from other template
+		☐ replace ? with title
+		☐ replace password with content
+		☐ delete forgot password
+	☐ add import  postform to routes.py
+	☐ create new form instance and send inside of render_temp as "form=form"
+	☐ methods: get, post
+	☐ if form.validate ons submit:
+		☐ flash: your post has been created
+		☐ post = Post(title = x, content = form.content.data, author = z)
+		☐ post.create()
+		☐ return redirect url_for(home)
+	☐ Add to layout template:
+		☐ if user auth'd link: create post
+	☐ remove dummy recipes?
+	☐ add to home():
+		☐ posts = Post.querry.all()
+	☐ Change home template:
+		☐ ?
+		☐ Add link for posts:
+			☐ url_for(post, post_id=post_id)
+	☐ New route: "/post/<post_id>"
+		☐ def post(post_id) :
+			☐ post = Post.query.get_or_404(post_id)
+	☐ Add new template post.html:
+		☐ Copy from home
+			☐ remove link of post
+		☐ Add inside div article metadata:
+			☐ if post.author == current_user:
+				☐ div
+					☐ a href link, url_for(update_post, post_id = post.id), Update
+					☐ button type button, class btn btn-danger btn-sm m1, delete
+		☐ Modal for confirming deletion:
+			☐ Go to button live deomo bootstrap page
+			☐ Copy the modal from bootstrap page
+			☐ paste it right above content closing logic
+			☐ Change modal title to "delete post?"
+			☐ remove modal content
+			☐ add to modal footer:
+				☐ form action = "url_for("delet_psot", post_id = post.id)", method = post
+					☐ input class button type submit
+	☐ Add new route: "/post/<post_id>/update":
+		☐ Add func update_post(post_id):
+			This can be posibly copied from post function
+			☐ post = Post.query.get_or_404(post_id)
+			☐ if post.author != current user:
+				☐ abort(403)
+					This means it's forbidden. Since we don't want non authors to edit the post
+			We use same create_post template for both update and create
+			☐ Send diferent legend to render template: update post
+			☐ form = postForm()
+			☐ if form.validate_on_subm:
+				☐ post.title = form.title.data
+				☐ psot.content = forn.content.data
+				☐ post.update()
+				☐ flash("your post has been updated")
+				☐ return redirect(url_for('post', post_id = post.id))
+			☐ elif request.method == 'GET':
+				☐ form.title.data = post.title
+				☐ form.content.data = post.content
+	☐ Add new route: "/post/<int:post_id>/delete":
+		☐ method = ['POST']
+		☐ post = Post.query.get_or_404(post_id)
+		☐ if post.author != current user:
+				☐ abort(403)
+		☐ post.delete
+		☐ flash("your post has been deleted")
+		☐ retrun redirect(home)
+	☐ Import abort at routes.py
+	Not coverd on video:
+		☐ New table: posts / recipes
+			☐ It already exitst? Its recipes
+			☐ Add functionally to query all
+			☐ add parameter four04 = None:
+				☐ if 404:
+					☐ add return 404 if it doesnt exists
+			☐ Add recipe_id as member to class
+				Since we will use it on route: "/recipe/<recipe_id>
+		☐ Our post form (add recipe):
+			☐ Add recipe imagei
+
+		☐ Add to dbinit:
+			☐ intializing dummy recipes
