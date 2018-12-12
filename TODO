@@ -125,6 +125,11 @@ Video 8 posts, update, delete:
 			We will use this at dbinit.py when init'ing the default images
 				(like we did with the default user image)
 		✔ Add getRecipeImage function and route @done(18-12-12 19:05)
+		☐ recipe/<recipe_id> route:
+			☐ change the route to recipe/<recipe_title>
+		☐ Change to database:
+			☐ Recipe:
+				☐ recipe_title has to be unique
 	Ömer:
 		Not coverd on video:
 			✔ New table: posts / recipes @done(18-12-12 18:59)
