@@ -58,8 +58,9 @@ def login():
     if form.validate_on_submit():
         userData = User().retrieve('*', f"email = '{form.email.data}'")
         if userData:
-            user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2], password=userData[0][3],
-                        email=userData[0][4], birthdate=userData[0][5], img_id=userData[0][6])
+            user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2],
+                        password=userData[0][3], email=userData[0][4],
+                        birthdate=userData[0][5], img_id=userData[0][6])
         else:
             user = None
 
@@ -96,11 +97,13 @@ def account():
             f_ext = f_ext[1:]
             if f_ext == 'jpg':
                 f_ext = 'jpeg'
-            image = User_image(filename=random_hex, extension=f_ext, img_data=form.picture.data)
+            image = User_image(filename=random_hex,
+                               extension=f_ext, img_data=form.picture.data)
             if current_user.img_id != 1:
                 image.delete(img_id=current_user.img_id)
             image.create()
-            current_user.img_id=image.retrieve('*', f"filename = '{random_hex}'")[0][0]
+            current_user.img_id = image.retrieve(
+                '*', f"filename = '{random_hex}'")[0][0]
         current_user.username = form.username.data
         current_user.name = form.name.data
         current_user.email = form.email.data
@@ -124,6 +127,16 @@ def getUserImage(img_id):
     img_data = User_image().retrieve('*', f"img_id = {img_id}")
     if img_data:
         image = User_image(img_id=img_data[0][0], filename=None,
-                            extension=img_data[0][2], img_data=img_data[0][3],
-                            date_uploaded=img_data[0][4])
+                           extension=img_data[0][2], img_data=img_data[0][3],
+                           date_uploaded=img_data[0][4])
+    return app.response_class(image.img_data, mimetype='application/octet-stream')
+
+
+@app.route("/getRecipeImage/<int:img_id>", methods=['GET', 'POST'])
+def getRecipeImage(img_id):
+    img_data = Recipe_image().retrieve('*', f"img_id = {img_id}")
+    if img_data:
+        image = Recipe_image(img_id=img_data[0][0], filename=None,
+                             extension=img_data[0][2], img_data=img_data[0][3],
+                             date_uploaded=img_data[0][4])
     return app.response_class(image.img_data, mimetype='application/octet-stream')
