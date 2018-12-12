@@ -131,6 +131,13 @@ Video 8 posts, update, delete:
 			☐ Recipe:
 				☐ recipe_title has to be unique
 					This task is related to @high tagged task
+		☐ recipe.html template:
+			☐ Add the following instead of temporary h1 element
+				<!--- """Uncomment this after fixing modal part
+				<div>
+					<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+					<button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+				</div>"""-->
 	Ömer:
 		Not coverd on video:
 			✔ New table: posts / recipes @done(18-12-12 18:59)
