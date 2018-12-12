@@ -25,7 +25,12 @@ recipes = [
 @app.route("/")
 @app.route("/home")
 def home():
-    recipes = Recipe().retrieve('*') #convert 'list of lists' to 'list'
+    recipeDatas = Recipe().retrieve('*') #convert 'list of lists' to 'list'
+    recipes = []
+    for recipeData in recipeDatas:
+        recipe = Recipe(recipe_id=recipeData[0], title=recipeData[1], content=recipeData[2],
+                        date_posted=recipeData[3], img_id=recipeData[4], author_id=recipeData[5])
+        recipes.append(recipe)
     return render_template('home.html', recipes=recipes)
 
 @app.route("/about")
