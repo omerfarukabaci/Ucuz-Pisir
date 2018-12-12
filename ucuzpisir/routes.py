@@ -158,7 +158,7 @@ def getRecipeImage(img_id):
 def createRecipe():
     form = RecipeForm()
     if form.validate_on_submit():
-        recipe_image_id = None
+        recipe_image_id = 1
         if form.picture.data:
             recipe_image_id = createNewImage(form.picture.data, "Recipe")
         recipe = Recipe(title = form.title.data, content = form.content.data,
