@@ -32,3 +32,24 @@ useful heroku CLI commands:
 
     reference:
         https://devcenter.heroku.com/articles/heroku-postgresql#expensive-queries
+
+python inheritance:
+
+    class Base():
+        def __init__(self):
+            self.x = 5
+
+    class ImageBase(Base):
+        def __init__(self):
+            super(ImageBase, self).__init__()
+            self.y = 4
+
+    class UserImage(ImageBase):
+        def __init__(self):
+            super(UserImage, self).__init__()
+            self.z = 3
+        def __repr__(self):
+            return f"x = '{self.x}', y ='{self.y}', z = '{self.z}'"
+
+    user_img = UserImage()
+    print(user_img)

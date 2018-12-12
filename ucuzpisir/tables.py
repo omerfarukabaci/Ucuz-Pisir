@@ -102,33 +102,66 @@ class User(Base, UserMixin):
 
 
 class Recipe(Base):
-    def __init__(self, user_id, title, recipe_text, ingridients,
-                 date_posted=datetime.utcnow,  # Fix datetime
+    def __init__(self, recipe_id, title, content,
+                 date_posted=datetime.utcnow,
                  recipe_img="imgs/defaultRecipe.jpg"):
-        self.user_id = user_id
+        super(Recipe, self).__init__() 
+        self.recipe_id = recipe_id
         self.title = title
-        self.recipe_text = recipe_text
-        self.ingridients = ingridients
+        self.content = content
         self.date_posted = date_posted
         self.recipe_img = recipe_img
+    #necessary functions will be written below
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
 
 
-class User_image(Base):
-    def __init__(self, url=None, img_id=None, filename=None, extension=None, img_data=None,
-                 date_uploaded=None):
-        super(User_image, self).__init__(url=url)
+class ImageBase(Base):
+    def __init__(self, url=None, img_id=None, filename=None, extension=None,
+                img_data=None, date_uploaded=None):
+        super(ImageBase, self).__init__(url=url)
         self.img_id = img_id
         self.filename = filename
         self.extension = extension
         self.img_data = img_data
-        self.shrinkImage()
         self.date_uploaded = date_uploaded
 
     def __repr__(self):
-        return f"Post('{self.filename}', '{self.date_uploaded}')"
+        return f"Image('{self.filename}', '{self.date_uploaded}')"
+
+    def reformatImage(self, size=(125, 125)):
+        if self.filename == None:
+            return
+        img = Image.open(self.img_data)
+        img = self.correctImageRotation(img)
+        img = ImageOps.fit(img, size, Image.ANTIALIAS)
+        output = io.BytesIO()
+        img.save(output, format=self.extension)
+        self.img_data = output.getvalue()
+
+    def correctImageRotation(self, image):
+        if hasattr(image, '_getexif'):
+            for orientation in ExifTags.TAGS.keys(): 
+                if ExifTags.TAGS[orientation]=='Orientation':
+                    break 
+            exifData = image._getexif()
+            if exifData is not None:
+                exif=dict(exifData.items())
+                orientation = exif[orientation] 
+                if orientation == 3:   image = image.transpose(Image.ROTATE_180)
+                elif orientation == 6: image = image.transpose(Image.ROTATE_270)
+                elif orientation == 8: image = image.transpose(Image.ROTATE_90)
+        return image
+
+
+class User_image(ImageBase):
+    def __init__(self, url=None, img_id=None, filename=None, extension=None, img_data=None,
+                 date_uploaded=None):
+        super(User_image, self).__init__(img_id=img_id, filename=filename,
+                                        extension=extension,img_data=img_data,
+                                        date_uploaded=date_uploaded, url=url)
+        self.reformatImage()
 
     def create(self):
         statement = f"""
@@ -161,27 +194,3 @@ class User_image(Base):
         where img_id = {img_id}
         """
         self.execute(statement)
-
-    def shrinkImage(self, size=(125, 125)):
-        if self.filename == None:
-            return
-        img = Image.open(self.img_data)
-        img = correctImageRotation(img)
-        img = ImageOps.fit(img, size, Image.ANTIALIAS)
-        output = io.BytesIO()
-        img.save(output, format=self.extension)
-        self.img_data = output.getvalue()
-
-def correctImageRotation(image):
-    if hasattr(image, '_getexif'):
-        for orientation in ExifTags.TAGS.keys(): 
-            if ExifTags.TAGS[orientation]=='Orientation':
-                break 
-        exifData = image._getexif()
-        if exifData is not None:
-            exif=dict(exifData.items())
-            orientation = exif[orientation] 
-            if orientation == 3:   image = image.transpose(Image.ROTATE_180)
-            elif orientation == 6: image = image.transpose(Image.ROTATE_270)
-            elif orientation == 8: image = image.transpose(Image.ROTATE_90)
-    return image
