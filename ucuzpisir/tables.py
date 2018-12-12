@@ -10,7 +10,11 @@ from PIL import Image, ImageOps, ExifTags
 
 @login_manager.user_loader
 def load_user(user_id):
-    user = User().retrieve('*', f"user_id = {user_id}")[0]
+    users = User().retrieve('*', f"user_id = {user_id}")
+    if users:
+        user = users[0]
+    else:
+        user = None
     return user
 
 
