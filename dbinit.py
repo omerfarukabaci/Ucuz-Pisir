@@ -19,7 +19,7 @@ INIT_STATEMENTS = [
         PASSWORD VARCHAR(70) NOT NULL,
         EMAIL VARCHAR(80) UNIQUE NOT NULL,
         BIRTHDATE DATE,
-        IMG_ID INTEGER REFERENCES USER_IMAGES(IMG_ID) DEFAULT 1
+        IMG_ID INTEGER REFERENCES USER_IMAGES(IMG_ID) ON DELETE SET DEFAULT DEFAULT 1
     )
     """,
     """CREATE TABLE IF NOT EXISTS RECIPES(
@@ -33,7 +33,7 @@ INIT_STATEMENTS = [
     """
 ]
 
-
+#
 def initialize(url):
     with dbapi2.connect(url) as connection:
         cursor = connection.cursor()

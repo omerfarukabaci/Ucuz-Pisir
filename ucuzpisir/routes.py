@@ -97,6 +97,8 @@ def account():
             if f_ext == 'jpg':
                 f_ext = 'jpeg'
             image = User_image(filename=random_hex, extension=f_ext, img_data=form.picture.data)
+            if current_user.img_id != 1:
+                image.delete(img_id=current_user.img_id)
             image.create()
             current_user.img_id=image.retrieve('*', f"filename = '{random_hex}'")[0][0]
         current_user.username = form.username.data
