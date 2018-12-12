@@ -114,13 +114,13 @@ def account():
         form.name.data = current_user.name
         form.email.data = current_user.email
         form.birthdate.data = current_user.birthdate
-    image_path = url_for('getImage', img_id=current_user.img_id)
+    image_path = url_for('getUserImage', img_id=current_user.img_id)
     return render_template('account.html', title='Account',
                            image_path=image_path, form=form)
 
 
-@app.route("/getImage/<int:img_id>", methods=['GET', 'POST'])
-def getImage(img_id):
+@app.route("/getUserImage/<int:img_id>", methods=['GET', 'POST'])
+def getUserImage(img_id):
     img_data = User_image().retrieve('*', f"img_id = {img_id}")
     if img_data:
         image = User_image(img_id=img_data[0][0], filename=None,
