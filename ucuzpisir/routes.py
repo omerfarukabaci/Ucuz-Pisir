@@ -47,7 +47,7 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        users = User().retrieve('*', f"email = '{form.email.data}'")[0]
+        user = User().retrieve('*', f"email = '{form.email.data}'")[0]
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
@@ -156,5 +156,6 @@ def recipe(recipe_id):
               'alert alert-danger alert-dismissible fade show')
         return redirect("home"), 404
     image_path = url_for('getRecipeImage', img_id=recipe.img_id)
-    return render_template('recipe.html', title=recipe.title,
-                           image_path=image_path, author_username=author_username)
+    author = User().retrieve("*", f"user_id = {recipe.author_id}")[0]
+    return render_template('recipe.html', title=recipe.title, recipe=recipe,
+                           image_path=image_path, author_username=author.username)
