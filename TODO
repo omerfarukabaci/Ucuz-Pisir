@@ -48,8 +48,8 @@ Video 8 posts, update, delete:
 		✔ replace password with content @done(18-12-12 20:49)
 		✔ delete forgot password @done(18-12-12 20:49)
 	✔ add import  postform to routes.py @done(18-12-12 20:50)
-	☐ Add to layout template: @ömer
-		☐ if user auth'd link: create post @ömer
+	✔ Add to layout template: @ömer @done(18-12-12 23:05)
+		✔ if user auth'd link: create post @ömer @done(18-12-12 23:05)
 	✔ remove dummy recipes? @ömer @done(18-12-12 21:48)
 	✔ add to home(): @ömer @done(18-12-12 21:48)
 		✔ posts = Post.querry.all() @done(18-12-12 21:48)

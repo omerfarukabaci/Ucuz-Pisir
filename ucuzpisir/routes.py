@@ -141,7 +141,7 @@ def createRecipe():
         recipe = Recipe(title=form.title.data, content=form.content.data,
                         author_id=current_user.user_id, img_id=recipe_image_id)
         recipe.create()
-        flash(f'Account updated!',
+        flash(f'Tarif oluşturuldu!',
               'alert alert-success alert-dismissible fade show')
         return redirect(url_for('home'))
     return render_template('create_recipe.html', title='Create new recipe',
