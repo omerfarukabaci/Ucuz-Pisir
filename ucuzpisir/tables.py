@@ -102,15 +102,16 @@ class User(Base, UserMixin):
 
 
 class Recipe(Base):
-    def __init__(self, recipe_id, title, content,
-                 date_posted=datetime.utcnow,
-                 recipe_img="imgs/defaultRecipe.jpg"):
+    def __init__(self, recipe_id=None, title=None, content=None,
+                 date_posted=datetime.utcnow, author_id=None,
+                 img_id=1):
         super(Recipe, self).__init__() 
         self.recipe_id = recipe_id
         self.title = title
         self.content = content
         self.date_posted = date_posted
-        self.recipe_img = recipe_img
+        self.author_id = author_id
+        self.img_id = img_id
     #necessary functions will be written below
 
     def __repr__(self):
