@@ -85,6 +85,8 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+def createNewImage(form_picture_data):
+    
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
@@ -140,3 +142,17 @@ def getRecipeImage(img_id):
                              extension=img_data[0][2], img_data=img_data[0][3],
                              date_uploaded=img_data[0][4])
     return app.response_class(image.img_data, mimetype='application/octet-stream')
+
+
+@app.route("/recipe/new", methods=['GET', 'POST'])
+@login_required
+def createRecipe():
+    form = RecipeForm()
+    if form.validate_on_submit():
+        recipe = Recipe(title = form.content.data, content = form.content.data, author = current_user.user_id)
+        recipe.create() 
+        flash(f'Account updated!',
+              'alert alert-success alert-dismissible fade show')
+        return redirect(url_for('home'))
+    return render_template('create_recipe.html', title='Create new recipe',
+                           form=form)
