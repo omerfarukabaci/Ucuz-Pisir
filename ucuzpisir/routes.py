@@ -15,12 +15,7 @@ def page_not_found(e):
 @app.route("/")
 @app.route("/home")
 def home():
-    recipeDatas = Recipe().retrieve('*')
-    recipes = []
-    for recipeData in recipeDatas:
-        recipe = Recipe(recipe_id=recipeData[0], title=recipeData[1], content=recipeData[2],
-                        date_posted=recipeData[3], img_id=recipeData[4], author_id=recipeData[5])
-        recipes.append(recipe)
+    recipes = Recipe().retrieve('*')
     return render_template('home.html', recipes=recipes)
 
 
@@ -52,14 +47,7 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        userData = User().retrieve('*', f"email = '{form.email.data}'")
-        if userData:
-            user = User(user_id=userData[0][0], name=userData[0][1], username=userData[0][2],
-                        password=userData[0][3], email=userData[0][4],
-                        birthdate=userData[0][5], img_id=userData[0][6])
-        else:
-            user = None
-
+        users = User().retrieve('*', f"email = '{form.email.data}'")[0]
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
@@ -100,8 +88,7 @@ def createNewImage(form_picture_data, image_type):
         image = Recipe_image(filename=random_hex,
                              extension=f_ext, img_data=form_picture_data)
     image.create()
-    image_id = image.retrieve('*', f"filename = '{random_hex}'")[0][0]
-    return image_id
+    return image.retrieve('*', f"filename = '{random_hex}'")[0].img_id
 
 
 @app.route("/account", methods=['GET', 'POST'])
@@ -133,21 +120,13 @@ def account():
 
 @app.route("/getUserImage/<int:img_id>", methods=['GET', 'POST'])
 def getUserImage(img_id):
-    img_data = User_image().retrieve('*', f"img_id = {img_id}")
-    if img_data:
-        image = User_image(img_id=img_data[0][0], filename=None,
-                           extension=img_data[0][2], img_data=img_data[0][3],
-                           date_uploaded=img_data[0][4])
+    image = User_image().retrieve('*', f"img_id = {img_id}")[0]
     return app.response_class(image.img_data, mimetype='application/octet-stream')
 
 
 @app.route("/getRecipeImage/<int:img_id>", methods=['GET', 'POST'])
 def getRecipeImage(img_id):
-    img_data = Recipe_image().retrieve('*', f"img_id = {img_id}")
-    if img_data:
-        image = Recipe_image(img_id=img_data[0][0], filename=None,
-                             extension=img_data[0][2], img_data=img_data[0][3],
-                             date_uploaded=img_data[0][4])
+    image = Recipe_image().retrieve('*', f"img_id = {img_id}")[0]
     return app.response_class(image.img_data, mimetype='application/octet-stream')
 
 
@@ -171,11 +150,8 @@ def createRecipe():
 
 @app.route("/recipe/<int:recipe_id>", methods=['GET'])
 def recipe(recipe_id):
-    recipeData = Recipe().retrieve("*", f"recipe_id = {recipe_id}")[0]
-    if recipeData:
-        recipe = Recipe(recipe_id=recipeData[0], title=recipeData[1], content=recipeData[2],
-                        date_posted=recipeData[3], img_id=recipeData[4], author_id=recipeData[5])
-    else:
+    recipe = Recipe().retrieve("*", f"recipe_id = {recipe_id}")[0]
+    if recipe is None:
         flash(f"Recipe you are looking for doesn't exist, sorry :(",
               'alert alert-danger alert-dismissible fade show')
         return redirect("home"), 404

@@ -89,7 +89,15 @@ class User(Base, UserMixin):
             statement += f""" 
             where {condition}
             """
-        return self.execute(statement, fetch=True)
+        userDatas = self.execute(statement, fetch=True)
+        users = []
+        for userData in userDatas:
+            user = User(user_id=userData[0], name=userData[1], username=userData[2],
+                        password=userData[3], email=userData[4],
+                        birthdate=userData[5], img_id=userData[6])
+            users.append(user)
+
+        return users
 
     def delete(self):
         statement = """
@@ -136,7 +144,14 @@ class Recipe(Base):
             statement += f""" 
             where {condition}
             """
-        return self.execute(statement, fetch=True)
+        recipeDatas = self.execute(statement, fetch=True)
+        recipes = []
+        for recipeData in recipeDatas:
+            recipe = Recipe(recipe_id=recipeData[0], title=recipeData[1], content=recipeData[2],
+                            date_posted=recipeData[3], img_id=recipeData[4], author_id=recipeData[5])
+            recipes.append(recipe)
+
+        return recipes
 
     def delete(self):
         statement = f"""
@@ -219,7 +234,15 @@ class User_image(ImageBase):
             statement += f""" 
             where {condition}
             """
-        return self.execute(statement, fetch=True)
+        imageDatas = self.execute(statement, fetch=True)
+        images = []
+        for imageData in imageDatas:
+            image = User_image(img_id=img_data[0], filename=img_data[1],
+                    extension=img_data[2], img_data=img_data[3],
+                    date_uploaded=img_data[4])
+            images.append(image)
+
+        return images
 
     def delete(self, img_id):
         statement = f"""
@@ -259,7 +282,14 @@ class Recipe_image(ImageBase):
             statement += f""" 
             where {condition}
             """
-        return self.execute(statement, fetch=True)
+        imageDatas = self.execute(statement, fetch=True)
+        for imageData in imageDatas:
+            image = Recipe_image(img_id=img_data[0], filename=img_data[1],
+                    extension=img_data[2], img_data=img_data[3],
+                    date_uploaded=img_data[4])
+            images.append(image)
+
+        return images
 
     def delete(self, img_id):
         statement = f"""
@@ -267,3 +297,4 @@ class Recipe_image(ImageBase):
         where img_id = {img_id}
         """
         self.execute(statement)
+
