@@ -31,12 +31,10 @@
                     <li class="nav-item px-2">
                         <a class="nav-link text-nowrap" href="{{url_for('home')}}">Tarifler</a>
                     </li>
-
-                    <li class="nav-item px-2">
-                        <a class="nav-link disabled text-nowrap" href="{{url_for('home')}}">Hakkımızda</a>
-                    </li>
-
                     {% if current_user.is_authenticated %}
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-nowrap" href="{{url_for('createRecipe')}}">Tarif Oluştur</a>
+                        </li>
                         <li class="nav-item dropdown px-2">
                             <a class="nav-link dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hesabım
@@ -47,6 +45,7 @@
                                 <a class="dropdown-item text-nowrap" href="{{url_for('logout')}}">Çıkış Yap</a>
                             </div>
                         </li>
+
                     {% else %}
                         <li class="nav-item px-2">
                             <a class="nav-link text-nowrap" href="{{url_for('login')}}">Giriş Yap</a>
@@ -54,7 +53,10 @@
                         <li class="nav-item px-2">
                             <a class="nav-link text-nowrap" href="{{url_for('register')}}">Üye Ol</a>
                         </li>
-                    {% endif %}
+                    {% endif %}      
+                    <li class="nav-item px-2">
+                        <a class="nav-link disabled text-nowrap" href="{{url_for('home')}}">Hakkımızda</a>
+                    </li>
                 </ul>
 
                 <form class="navbar-form form-inline w-50">
