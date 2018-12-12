@@ -2,7 +2,8 @@ Html/Templates:
   ☐ change text in the routes "/login" and "/register" from Turkish to English . @started(18-11-07 17:17)
   ☐ Add footer: @started(18-11-07 17:17)
       ☐ Maybe move: about link from header to footer @started(18-11-07 17:17)
-  ☐ recipe.html @started(18-12-04 21:24)
+  ✘ recipe.html @started(18-12-04 21:24) @cancelled(18-12-12 21:42) @wasted(1w1d18m19s)
+		This is task is covered below as "add new template post.html
 
 Gitignore:
   ☐ Check if docs/build ignore correct. @started(18-12-04 20:07)
@@ -112,8 +113,8 @@ Video 8 posts, update, delete:
 					☐ add return 404 if it doesnt exists
 			✔ Add recipe_id as member to class @done(18-12-12 20:16)
 				Since we will use it on route: "/recipe/<recipe_id>"
-		☐ Our post form (add recipe): @berkan
-			☐ Add recipe image
+		✔ Our post form (add recipe): @berkan @done(18-12-12 21:44)
+			✔ Add recipe image @done(18-12-12 21:44)
 		✘ Add to dbinit: @cancelled(18-12-12 20:16)
 			✘ intializing dummy recipes @cancelled(18-12-12 20:16)
 		✔ Git add default recipe_image @done(18-12-12 20:16)
