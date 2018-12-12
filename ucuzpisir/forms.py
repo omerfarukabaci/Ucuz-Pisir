@@ -77,3 +77,6 @@ class RecipeForm(FlaskForm):
     content = TextAreaField('Recipe instructions',
                             validators=[DataRequired(), Length(min=80)])
     submit = SubmitField('Submit')
+
+    picture = FileField('Update Meal Image', validators=[
+                    FileAllowed(['jpg', 'jpeg', 'png'])])
