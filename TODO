@@ -41,7 +41,7 @@ Video 8 posts, update, delete:
 		✔ content textareafield, validators: datareq @done(18-12-12 20:20)
 		✔ submit submitfield @done(18-12-12 20:20)
 	☐ new template: create_post:
-		☐ copy form from other template
+		✔ copy form from other template @done(18-12-12 20:46)
 		☐ replace ? with title
 		☐ replace password with content
 		☐ delete forgot password
