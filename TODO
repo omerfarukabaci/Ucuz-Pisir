@@ -47,8 +47,8 @@ Video 8 posts, update, delete:
 		✔ replace password with content @done(18-12-12 20:49)
 		✔ delete forgot password @done(18-12-12 20:49)
 	✔ add import  postform to routes.py @done(18-12-12 20:50)
-	☐ Add to layout template:
-		☐ if user auth'd link: create post
+	☐ Add to layout template: @ömer
+		☐ if user auth'd link: create post @ömer
 	✔ remove dummy recipes? @ömer @done(18-12-12 21:48)
 	✔ add to home(): @ömer @done(18-12-12 21:48)
 		✔ posts = Post.querry.all() @done(18-12-12 21:48)
@@ -56,17 +56,17 @@ Video 8 posts, update, delete:
 		☐ ?
 		☐ Add link for posts:
 			☐ url_for(post, post_id=post_id)
-	☐ New route: "/post/<post_id>"
-		☐ def post(post_id) :
-			☐ post = Post.query.get_or_404(post_id)
-	☐ Add new template post.html:
-		☐ Copy from home
-			☐ remove link of post
-		☐ Add inside div article metadata:
-			☐ if post.author == current_user:
-				☐ div
-					☐ a href link, url_for(update_post, post_id = post.id), Update
-					☐ button type button, class btn btn-danger btn-sm m1, delete
+	☐ New route: "/post/<post_id>" @berkan
+		☐ def post(post_id) :@berkan
+			☐ post = Post.query.get_or_404(post_id)@berkan
+	☐ Add new template post.html: @berkan
+		☐ Copy from home @berkan
+			☐ remove link of post @berkan
+		☐ Add inside div article metadata: @berkan
+			☐ if post.author == current_user: @berkan
+				☐ div @berkan
+					☐ a href link, url_for(update_post, post_id = post.id), Update @berkan
+					☐ button type button, class btn btn-danger btn-sm m1, delete @berkan
 		☐ Modal for confirming deletion:
 			☐ Go to button live deomo bootstrap page
 			☐ Copy the modal from bootstrap page
@@ -129,14 +129,3 @@ Video 8 posts, update, delete:
 				☐ add parameter four04 = None:
 					☐ if 404:
 						☐ add return 404 if it doesnt exists
-			✔ Add recipe_id as member to class @done(18-12-12 20:15)
-				Since we will use it on route: "/recipe/<recipe_id>"
-			✘ Add to dbinit: @cancelled(18-12-12 20:15)
-				✘ intializing dummy recipes @cancelled(18-12-12 20:15)
-			✔ Git add default recipe_image @done(18-12-12 20:15)
-				We will use this at dbinit.py when init'ing the default images
-					(like we did with the default user image)
-	✔ remove dummy recipes? @done(18-12-12 21:47)
-	✔ add to home(): @done(18-12-12 21:47)
-		✔ posts = Post.querry.all() @done(18-12-12 21:47)
-		
