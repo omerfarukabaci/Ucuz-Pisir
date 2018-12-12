@@ -3,12 +3,17 @@
     <article class="media content-section">
         <img class = "rounded-circle" alt="{{ recipe.title }}" src="{{ image_path }}">
         <div class="media-body w-50">
-            <h2 class="article-title">{{ recipe.title }}</h2>
+            <h2 class="article-title ml-2 mb-0">{{ recipe.title }}</h2>
             <div class="article-metadata">
-                <a class="mx-2" href="#">{{ author_username }}</a>
+                <a class="mx-3" href="#">{{ author_username }}</a>
                 <small class="text-muted">{{ recipe.date_posted.strftime('%d-%m-%Y') }}</small>
                 {% if recipe.author_id == current_user.user_id %}
-                    <!--<h1>"logic works."</h1>-->     
+                <div>
+                    <a class="btn btn-info btn-sm ml-3 mt-3 mb-1"
+                    href="{{ url_for('update_recipe', recipe_id=recipe.recipe_id) }}">
+                    Update
+                    </a>
+                </div>
                 {% endif %}
             </div>
             
