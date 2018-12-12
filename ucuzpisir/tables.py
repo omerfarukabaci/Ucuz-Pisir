@@ -103,7 +103,7 @@ class User(Base, UserMixin):
 
 class Recipe(Base):
     def __init__(self, recipe_id=None, title=None, content=None,
-                 date_posted=datetime.utcnow, author_id=None,
+                 date_posted=None, author_id=None,
                  img_id=1):
         super(Recipe, self).__init__() 
         self.recipe_id = recipe_id
@@ -115,8 +115,8 @@ class Recipe(Base):
     
     def create(self):
         statement = f"""
-        insert into recipes (title, content, date_posted, img_id, author_id)
-        values ('{self.title}', '{self.content}', '{self.date_posted}', '{self.img_id}',
+        insert into recipes (title, content, img_id, author_id)
+        values ('{self.title}', '{self.content}', '{self.img_id}',
         '{self.author_id}')
         """
         self.execute(statement)
