@@ -1,7 +1,7 @@
 import os
 import sys
 import psycopg2 as dbapi2
-from ucuzpisir.tables import User_image
+from ucuzpisir.tables import User_image, Recipe_image
 
 INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS USER_IMAGES(
@@ -40,14 +40,14 @@ INIT_STATEMENTS = [
     """
 ]
 
-#
+
 def initialize(url):
     with dbapi2.connect(url) as connection:
         cursor = connection.cursor()
         for statement in INIT_STATEMENTS:
             cursor.execute(statement)
         cursor.close()
-    insertDefaultImage(url)
+    insertDefaultImages(url)
 
 
 def insertDefaultImages(url):
@@ -57,6 +57,11 @@ def insertDefaultImages(url):
                                   img_data=imageData)
         defaultImage.create()
 
+    with open('ucuzpisir/static/imgs/default_recipe.jpg', 'rb') as f:
+        imageData = f
+        defaultImage = Recipe_image(url=url, filename='default', extension='jpeg',
+                                  img_data=imageData)
+        defaultImage.create()
 
 if __name__ == "__main__":
     url = os.getenv("DATABASE_URL")
