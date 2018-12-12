@@ -85,9 +85,10 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-def createNewImage(form_picture_data):
+def createNewImage(form_picture_data, image_type):
     """
     param form_picture_data: picture data from form
+    param image_type: type of the image, ex: user_image, recipe_image
     returns: id of the created image
     """
     random_hex = secrets.token_hex(8)
@@ -95,8 +96,12 @@ def createNewImage(form_picture_data):
     f_ext = f_ext[1:]
     if f_ext == 'jpg':
         f_ext = 'jpeg'
-    image = User_image(filename=random_hex,
-                        extension=f_ext, img_data=form_picture_data)
+    if image_type == "User":
+        image = User_image(filename=random_hex,
+                            extension=f_ext, img_data=form_picture_data)
+    else if image_type == "Recipe":
+        image = Recipe_image(filename=random_hex,
+                            extension=f_ext, img_data=form_picture_data)
     image.create()
     image_id = image.retrieve('*', f"filename = '{random_hex}'")[0][0]
     return image_id
@@ -153,7 +158,11 @@ def getRecipeImage(img_id):
 def createRecipe():
     form = RecipeForm()
     if form.validate_on_submit():
-        recipe = Recipe(title = form.content.data, content = form.content.data, author = current_user.user_id)
+        recipe_image_id = None
+        if form.picture.data:
+            recipe_image_id = createNewImage(form.picture.data)
+        recipe = Recipe(title = form.content.data, content = form.content.data,
+                        author = current_user.user_id, recipe_img = recipe_image_id)
         recipe.create() 
         flash(f'Account updated!',
               'alert alert-success alert-dismissible fade show')

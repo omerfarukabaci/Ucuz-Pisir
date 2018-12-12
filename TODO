@@ -12,7 +12,9 @@ Users:
 
 
 Unorganized:
-	☐ Wrap update profile picture with a function @berkan
+	✔ Wrap update profile picture with a function @berkan @done(18-12-12 19:47)
+	☐ Rename picture as image on whole project
+		It is inconsistent with rest of the project, some images are randomly named as picture
 	☐ Add new validator to posts:
 		☐ Content minimum character: 100?
 		☐ Title minimum character: 8
