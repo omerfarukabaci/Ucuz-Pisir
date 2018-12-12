@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
 	<div class="row">
-    {% for recipe in content %}
+    {% for recipe in recipes %}
         	<div class = "col-sm-12 col-md-6 col-lg-4 " width = "200px">
 				<div class = "card">          		
 					<div class = "card-title">{{ recipe.title }}</div>
 					<img class ="card-img-top"
 						height = "150px"
 						alt="{{ recipe.title }}"
-						src= {{url_for('static', filename="imgs/"+recipe.image_path)}}>
+						src= "{{url_for('getRecipeImage', img_id=recipe.img_id)}}">
 				</div>
         	</div>
 	{% endfor %}

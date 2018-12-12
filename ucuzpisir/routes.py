@@ -25,8 +25,8 @@ recipes = [
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', content=recipes)
-
+    recipes = Recipe().retrieve('*') #convert 'list of lists' to 'list'
+    return render_template('home.html', recipes=recipes)
 
 @app.route("/about")
 def about():
