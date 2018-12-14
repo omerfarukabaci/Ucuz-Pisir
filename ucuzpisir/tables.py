@@ -293,7 +293,7 @@ class Recipe_image(ImageBase):
 
     def delete(self, img_id):
         statement = """
-        delete from user_images
+        delete from recipe_images
         where img_id = %s
         """
         self.execute(statement, (img_id,))
