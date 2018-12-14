@@ -22,14 +22,14 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
-        user = User().retrieve('username', f"username = '{username.data}'")
-        if user:
+        users = User().retrieve('*', "username = %s", (username.data,))
+        if users:
             raise ValidationError(
                 'That username is taken. Please choose a different one.')
 
     def validate_email(self, email):
-        user = User().retrieve('email', f"email = '{email.data}'")
-        if user:
+        users = User().retrieve('*', "email = %s", (email.data,))
+        if users:
             raise ValidationError(
                 'That email is taken. Please choose a different one.')
 
@@ -58,15 +58,15 @@ class AccountUpdateForm(FlaskForm):
 
     def validate_username(self, username):
         if username.data != current_user.username:
-            user = User().retrieve('username', f"username = '{username.data}'")
-            if user:
+            users = User().retrieve('*', "username = %s", (username.data,))
+            if users:
                 raise ValidationError(
                     'That username is taken. Please choose a different one.')
 
     def validate_email(self, email):
         if email.data != current_user.email:
-            user = User().retrieve('email', f"email = '{email.data}'")
-            if user:
+            users = User().retrieve('*', "email = %s", (email.data,))
+            if users:
                 raise ValidationError(
                     'That email is taken. Please choose a different one.')
 

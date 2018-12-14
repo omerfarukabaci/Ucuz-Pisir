@@ -47,8 +47,7 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        users = User().retrieve('*', f"email = '{form.email.data}'")
-
+        users = User().retrieve('*', "email = %s", (form.email.data,))
         if users:
             user = users[0]
         else:
@@ -94,7 +93,7 @@ def createNewImage(form_picture_data, image_type):
         image = Recipe_image(filename=random_hex,
                              extension=f_ext, img_data=form_picture_data)
     image.create()
-    images = image.retrieve('*', f"filename = '{random_hex}'")
+    images = image.retrieve('*', "filename = %s", (random_hex,))
     if images:
         image = images[0]
     else:
@@ -132,7 +131,7 @@ def account():
 
 @app.route("/getUserImage/<int:img_id>", methods=['GET', 'POST'])
 def getUserImage(img_id):
-    images = User_image().retrieve('*', f"img_id = {img_id}")
+    images = User_image().retrieve('*', "img_id = %s", (img_id,))
     if images:
         image = images[0]
     else:
@@ -142,7 +141,7 @@ def getUserImage(img_id):
 
 @app.route("/getRecipeImage/<int:img_id>", methods=['GET', 'POST'])
 def getRecipeImage(img_id):
-    images = Recipe_image().retrieve('*', f"img_id = {img_id}")
+    images = Recipe_image().retrieve('*', "img_id = %s", (img_id,))
     if images:
         image = images[0]
     else:
@@ -170,7 +169,7 @@ def createRecipe():
 
 @app.route("/recipe/<int:recipe_id>", methods=['GET'])
 def recipe(recipe_id):
-    recipes = Recipe().retrieve("*", f"recipe_id = {recipe_id}")
+    recipes = Recipe().retrieve('*', "recipe_id = %s", (recipe_id,))
     if recipes:
         recipe = recipes[0]
     else:
@@ -179,14 +178,14 @@ def recipe(recipe_id):
         return redirect(url_for('home')), 404 
 
     image_path = url_for('getRecipeImage', img_id=recipe.img_id)
-    author = User().retrieve("*", f"user_id = {recipe.author_id}")[0]
+    author = User().retrieve('*', "user_id = %s", (recipe.author_id,))[0]
     return render_template('recipe.html', title=recipe.title, recipe=recipe,
                            image_path=image_path, author_username=author.username)
 
 @app.route("/recipe/<int:recipe_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_recipe(recipe_id):
-    recipes = Recipe().retrieve("*", f"recipe_id = {recipe_id}")
+    recipes = Recipe().retrieve('*', "recipe_id = %s", (recipe_id,))
     if recipes:
         recipe = recipes[0]
     else:
@@ -220,7 +219,7 @@ def update_recipe(recipe_id):
 @app.route("/recipe/<int:recipe_id>/delete", methods=['POST','GET'])
 @login_required
 def delete_recipe(recipe_id):
-    recipes = Recipe().retrieve("*", f"recipe_id = {recipe_id}")
+    recipes = Recipe().retrieve('*', "recipe_id = %s", (recipe_id,))
     if recipes:
         recipe = recipes[0]
     else:
