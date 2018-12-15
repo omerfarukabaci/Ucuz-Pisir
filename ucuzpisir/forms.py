@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from ucuzpisir.tables import User
 from flask_login import current_user
@@ -11,8 +12,7 @@ class RegistrationForm(FlaskForm):
                            validators=[DataRequired(), Length(min=2, max=20)])
     name = StringField('Name',
                        validators=[DataRequired(), Length(min=2, max=20)])
-    birthdate = DateTimeField('Your birthdate', format='%d/%m/%Y',
-                              render_kw={"placeholder": "DD/MM/YYYY"})
+    birthdate = DateField('Your birthdate')
     email = StringField('Email',
                         validators=[DataRequired(), Email(), Length(max=80)])
     password = PasswordField('Password',
@@ -48,8 +48,7 @@ class AccountUpdateForm(FlaskForm):
                            validators=[DataRequired(), Length(min=2, max=20)])
     name = StringField('Name',
                        validators=[DataRequired(), Length(min=2, max=20)])
-    birthdate = DateTimeField('Your birthdate', format='%d/%m/%Y',
-                              render_kw={"placeholder": "DD/MM/YYYY"})
+    birthdate = DateField('Your birthdate')
     email = StringField('Email',
                         validators=[DataRequired(), Email(), Length(max=80)])
     picture = FileField('Update Profile Picture', validators=[
