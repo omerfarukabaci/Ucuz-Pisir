@@ -3,10 +3,8 @@ import secrets
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from ucuzpisir import app, bcrypt
-from ucuzpisir.forms import RegistrationForm, LoginForm, AccountUpdateForm, RecipeForm
+from ucuzpisir.forms import RegistrationForm, LoginForm, AccountUpdateForm, RecipeForm, IngredientForm
 from ucuzpisir.tables import Base, User, User_image, Recipe, Recipe_image
-
-
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404

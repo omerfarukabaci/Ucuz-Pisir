@@ -32,6 +32,31 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
+                        {{ form.ingredients.label(class="form-control-label") }}
+                        {% for ingredient in form.ingredients %}
+                            {% if ingredient.errors %}
+                            <table class="table table-sm table-striped w-50">
+                                {% for field in ingredient %}
+                                    <tr>
+                                        <th>{{field.label}}</th>
+                                        <td>{{ field(class="form-control form-control-lg is-invalid") }}
+                                            <div class="invalid-feedback m-0 p-0">
+                                                {% for error in field.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            {% else %}
+                                {{ ingredient(class="table table-sm table-striped w-50") }}
+                            {% endif %}
+                        {% endfor %}
+                </div>
+                <input class="btn btn-info mb-3" type="button" value="Add Ingredient" id="addIngredient"/>
+                <div class="form-group">
                     {{ form.picture.label() }}
                     {{ form.picture(class="form-control-file") }}
                     {% if form.picture.errors %}
