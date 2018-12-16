@@ -23,6 +23,16 @@
                     $ingredient.insertAfter("#ingredients-" + ($ingredient_num - 1));
                 });
             });
+
+            $(document).ready(function(){
+                $("#removeIngredient").click(function(){
+                    if ($ingredient_num != 0){
+                        $("#ingredients-" + $ingredient_num).remove();
+                        $ingredient_num--;
+                    }
+
+                });
+            });
         </script>
         {% if title %}<title>Ucuzpisir - {{ title }}</title>
         {% else %}<title>Ucuzpisir</title>{% endif %}

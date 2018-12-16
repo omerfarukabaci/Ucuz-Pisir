@@ -55,7 +55,8 @@
                             {% endif %}
                         {% endfor %}
                 </div>
-                <input class="btn btn-info mb-3" type="button" value="Add Ingredient" id="addIngredient"/>
+                <input class="btn btn-info mb-3 mr-3" type="button" value="Add" id="addIngredient"/>
+                <input class="btn btn-danger mb-3" type="button" value="Remove" id="removeIngredient"/>
                 <div class="form-group">
                     {{ form.picture.label() }}
                     {{ form.picture(class="form-control-file") }}
