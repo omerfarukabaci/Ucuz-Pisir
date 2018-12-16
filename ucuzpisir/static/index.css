@@ -72,3 +72,7 @@ body {
     justify-self: center;
     overflow-wrap: break-word;
 }
+
+.table th{
+    font-weight: normal;
+}
