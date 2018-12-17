@@ -174,7 +174,7 @@ def createRecipe():
                            protein=ingredient['protein'], fat=ingredient['fat'],
                            carb=ingredient['carb']).create()
             ingredient_id = Ingredient().retrieve('*', "name = %s",
-                                            (ingredient['ingredient_name'],))[0].ingredient_id
+                                                  (ingredient['ingredient_name'],))[0].ingredient_id
             Recipe_Ingredient(recipe_id=recipe.recipe_id, ingredient_id=ingredient_id,
                               quantity=ingredient['quantity'], unit=ingredient['unit']).create()
 
@@ -188,6 +188,13 @@ def createRecipe():
 @app.route("/recipe/<int:recipe_id>", methods=['GET'])
 def recipe(recipe_id):
     recipes = Recipe().retrieve('*', "recipe_id = %s", (recipe_id,))
+    ingredientDatas = Recipe_Ingredient().retrieve("ingredient_id, unit, quantity",
+                                               "recipe_id = %s", (recipe_id,))
+    ingredientNames = []
+    for ingredientData in ingredientDatas:
+        ingredientNames.append(Ingredient().retrieve(
+            "name", "ingredient_id = %s", (ingredientData[0],))[0][0])
+
     if recipes:
         recipe = recipes[0]
     else:
@@ -198,7 +205,8 @@ def recipe(recipe_id):
     image_path = url_for('getRecipeImage', img_id=recipe.img_id)
     author = User().retrieve('*', "user_id = %s", (recipe.author_id,))[0]
     return render_template('recipe.html', title=recipe.title, recipe=recipe,
-                           image_path=image_path, author_username=author.username)
+                           image_path=image_path, author_username=author.username,
+                           ingredientNames=ingredientNames, ingredientDatas=ingredientDatas)
 
 
 @app.route("/recipe/<int:recipe_id>/update", methods=['GET', 'POST'])

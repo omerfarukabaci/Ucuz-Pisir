@@ -26,6 +26,26 @@
                     {{ recipe.content}}
                 </div>
             </div>
+            <table class = "table table-info table-sm table-striped w-75 ml-3">
+                <thead>
+                    <td colspan="3" class="font-weight-bold w-25 h3 text-center">
+                        <div class="text-center">Ingredients</div>
+                    </td>
+                </thead>
+                <tr class = "thead">
+                    <th scope="col" class="text-danger font-weight-bold w-25 text-center h5">Name</th>
+                    <th scope="col" class="text-danger font-weight-bold w-25 text-center h5">Quantity</th>
+                    <th scope="col" class="text-danger font-weight-bold w-25 text-center h5">Unit</th>
+                </tr>
+                {% for name in ingredientNames %}
+                <tr>
+                    <td class="text-center">{{ingredientNames[loop.index0]}}</td>
+                    <td class="text-center">{{ingredientDatas[loop.index0][2]}}</td>
+                    <td class="text-center">({{ingredientDatas[loop.index0][1]}})</td>
+                </tr>
+                {% endfor %}        
+            </table>
+
         </div>
     </article>
     <!-- Modal -->
