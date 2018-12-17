@@ -4,7 +4,9 @@ from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from ucuzpisir import app, bcrypt
 from ucuzpisir.forms import RegistrationForm, LoginForm, AccountUpdateForm, RecipeForm, IngredientForm
-from ucuzpisir.tables import Base, User, User_image, Recipe, Recipe_image
+from ucuzpisir.tables import Base, User, User_image, Recipe, Recipe_image, Ingredient, Recipe_Ingredient
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -152,12 +154,30 @@ def getRecipeImage(img_id):
 def createRecipe():
     form = RecipeForm()
     if form.validate_on_submit():
+        if Recipe().retrieve('*', "title = %s", (form.title.data,)):
+            flash(f'Bu tarif zaten var!',
+                  'alert alert-danger alert-dismissible fade show')
+            return render_template('create_recipe.html', title='Create new recipe',
+                                   form=form, legend='Tarif Oluştur')
+
         recipe_image_id = 1
         if form.picture.data:
             recipe_image_id = createNewImage(form.picture.data, "Recipe")
         recipe = Recipe(title=form.title.data, content=form.content.data,
                         author_id=current_user.user_id, img_id=recipe_image_id)
         recipe.create()
+        recipe = Recipe().retrieve('*', "title = %s", (form.title.data,))[0]
+
+        for ingredient in form.ingredients.data:
+            if not Ingredient().retrieve('*', "name = %s", (ingredient['ingredient_name'],)):
+                Ingredient(name=ingredient['ingredient_name'], calories=ingredient['calories'],
+                           protein=ingredient['protein'], fat=ingredient['fat'],
+                           carb=ingredient['carb']).create()
+            ingredient_id = Ingredient().retrieve('*', "name = %s",
+                                            (ingredient['ingredient_name'],))[0].ingredient_id
+            Recipe_Ingredient(recipe_id=recipe.recipe_id, ingredient_id=ingredient_id,
+                              quantity=ingredient['quantity'], unit=ingredient['unit']).create()
+
         flash(f'Tarif oluşturuldu!',
               'alert alert-success alert-dismissible fade show')
         return redirect(url_for('home'))
@@ -173,12 +193,13 @@ def recipe(recipe_id):
     else:
         flash(f"Recipe you are looking for doesn't exist, sorry :(",
               'alert alert-danger alert-dismissible fade show')
-        return redirect(url_for('home')), 404 
+        return redirect(url_for('home')), 404
 
     image_path = url_for('getRecipeImage', img_id=recipe.img_id)
     author = User().retrieve('*', "user_id = %s", (recipe.author_id,))[0]
     return render_template('recipe.html', title=recipe.title, recipe=recipe,
                            image_path=image_path, author_username=author.username)
+
 
 @app.route("/recipe/<int:recipe_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -190,7 +211,7 @@ def update_recipe(recipe_id):
         flash(f"Recipe you are looking for doesn't exist, sorry :(",
               'alert alert-danger alert-dismissible fade show')
         return redirect(url_for('home')), 404
-    
+
     if recipe.author_id != current_user.user_id:
         flash(f"You are not supposed to be here, sorry. :(",
               'alert alert-danger alert-dismissible fade show')
@@ -206,7 +227,7 @@ def update_recipe(recipe_id):
         recipe.content = form.content.data
         recipe.update()
         flash('Your recipe has been updated!',
-        'alert alert-success alert-dismissible fade show')
+              'alert alert-success alert-dismissible fade show')
         return redirect(url_for('recipe', recipe_id=recipe.recipe_id))
     elif request.method == 'GET':
         form.title.data = recipe.title
@@ -214,7 +235,8 @@ def update_recipe(recipe_id):
     return render_template('create_recipe.html', title='Update Recipe',
                            form=form, legend='Update Recipe')
 
-@app.route("/recipe/<int:recipe_id>/delete", methods=['POST','GET'])
+
+@app.route("/recipe/<int:recipe_id>/delete", methods=['POST', 'GET'])
 @login_required
 def delete_recipe(recipe_id):
     recipes = Recipe().retrieve('*', "recipe_id = %s", (recipe_id,))
@@ -224,12 +246,13 @@ def delete_recipe(recipe_id):
         flash(f"Recipe you are looking for doesn't exist, sorry :(",
               'alert alert-danger alert-dismissible fade show')
         return redirect(url_for('home')), 404
-    
+
     if recipe.author_id != current_user.user_id:
         flash(f"You are not supposed to be here, sorry. :(",
               'alert alert-danger alert-dismissible fade show')
         return redirect(url_for('home')), 404
 
     recipe.delete()
-    flash('Your recipe has been deleted!', 'alert alert-success alert-dismissible fade show')
+    flash('Your recipe has been deleted!',
+          'alert alert-success alert-dismissible fade show')
     return redirect(url_for('home'))
