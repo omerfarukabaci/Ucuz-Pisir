@@ -46,6 +46,16 @@ class Base:
                     response = cursor.fetchall()
         return response
 
+    def join(queryKey, condition=None, variables=None):
+        statement = f"""
+        select {queryKey} from users"""
+        if (condition):
+            statement += f""" 
+            where {condition}
+            """
+        query = self.execute(statement, variables, fetch=True)
+        return query
+
 
 class User(Base, UserMixin):
 
@@ -365,7 +375,7 @@ class Ingredient(Base):
 
 
 class Recipe_Ingredient(Base):
-    def __init__(self, recipe_id, ingredient_id, quantity, unit):
+    def __init__(self, recipe_id=None, ingredient_id=None, quantity=None, unit=None):
         super(Recipe_Ingredient, self).__init__()
         self.recipe_id = recipe_id
         self.ingredient_id = ingredient_id
