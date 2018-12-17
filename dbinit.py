@@ -12,7 +12,7 @@ INIT_STATEMENTS = [
         DATE_UPLOADED DATE DEFAULT CURRENT_DATE
     )
     """,
-        """CREATE TABLE IF NOT EXISTS RECIPE_IMAGES(
+    """CREATE TABLE IF NOT EXISTS RECIPE_IMAGES(
         IMG_ID SERIAL PRIMARY KEY,
         FILENAME VARCHAR(20) UNIQUE NOT NULL,
         EXTENSION VARCHAR(7) NOT NULL,
@@ -78,8 +78,9 @@ def insertDefaultImages(url):
     with open('ucuzpisir/static/imgs/default_recipe.jpg', 'rb') as f:
         imageData = f
         defaultImage = Recipe_image(url=url, filename='default', extension='jpeg',
-                                  img_data=imageData)
+                                    img_data=imageData)
         defaultImage.create()
+
 
 if __name__ == "__main__":
     url = os.getenv("DATABASE_URL")

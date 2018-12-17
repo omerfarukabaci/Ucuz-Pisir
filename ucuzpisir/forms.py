@@ -72,14 +72,15 @@ class AccountUpdateForm(FlaskForm):
 
 
 class IngredientForm(FlaskForm):
-    ingredient_name = StringField('Name', validators=[DataRequired(), Length(min=3)])
+    ingredient_name = StringField(
+        'Name', validators=[DataRequired(), Length(min=3)])
     quantity = IntegerField('Quantity', validators=[DataRequired()])
     unit = StringField('Unit', validators=[DataRequired(), Length(min=3)])
     calories = IntegerField('Calories (kcal)', validators=[DataRequired()])
     protein = IntegerField('Protein (g)', validators=[DataRequired()])
     fat = IntegerField('Fat (g)', validators=[DataRequired()])
     carb = IntegerField('Carbonhydrate (g)', validators=[DataRequired()])
-    
+
     class Meta:
         csrf = False
 
@@ -94,4 +95,5 @@ class RecipeForm(FlaskForm):
     picture = FileField('Update Meal Image', validators=[
         FileAllowed(['jpg', 'jpeg', 'png'])])
 
-    ingredients = FieldList(FormField(IngredientForm), label='Ingredients', min_entries=1)
+    ingredients = FieldList(FormField(IngredientForm),
+                            label='Ingredients', min_entries=1)

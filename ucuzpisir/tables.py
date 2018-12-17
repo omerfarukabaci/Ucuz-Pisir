@@ -377,7 +377,8 @@ class Recipe_Ingredient(Base):
         insert into recipe_ingredients (recipe_id, ingredient_id, quantity, unit)
         values (%s, %s, %s, %s)
         """
-        self.execute(statement, (self.recipe_id, self.ingredient_id, self.quantity, self.unit))
+        self.execute(statement, (self.recipe_id,
+                                 self.ingredient_id, self.quantity, self.unit))
 
     def update(self):
         statement = """
@@ -396,14 +397,15 @@ class Recipe_Ingredient(Base):
             statement += f""" 
             where {condition}
             """
-        recipe_ingredientsDatas = self.execute(statement, variables, fetch=True)
+        recipe_ingredientsDatas = self.execute(
+            statement, variables, fetch=True)
         if queryKey == '*':
             recipe_ingredients = []
             for recipe_ingredientsData in recipe_ingredientsDatas:
                 recipe_ingredient = Recipe_Ingredient(recipe_id=recipe_ingredientsData[0],
-                                        ingredient_id=recipe_ingredientsData[1],
-                                        quantity=recipe_ingredientsData[2],
-                                        unit=recipe_ingredientsData[3])
+                                                      ingredient_id=recipe_ingredientsData[1],
+                                                      quantity=recipe_ingredientsData[2],
+                                                      unit=recipe_ingredientsData[3])
                 recipe_ingredients.append(recipe_ingredient)
             return recipe_ingredients
         return recipe_ingredientsDatas
