@@ -181,7 +181,7 @@ def createRecipe():
         flash(f'Tarif oluşturuldu!',
               'alert alert-success alert-dismissible fade show')
         return redirect(url_for('home'))
-    return render_template('create_recipe.html', title='Create new recipe',
+    return render_template('create_recipe.html', title='Create New Recipe',
                            form=form, legend='Tarif Oluştur')
 
 
@@ -226,7 +226,10 @@ def update_recipe(recipe_id):
         return redirect(url_for('home')), 404
 
     form = RecipeForm()
-    if form.validate_on_submit():
+    if request.method == 'GET':
+        form.title.data = recipe.title
+        form.content.data = recipe.content
+    else:
         if form.picture.data:
             if recipe.img_id != 1:
                 Recipe_image().delete(img_id=recipe.img_id)
@@ -235,11 +238,8 @@ def update_recipe(recipe_id):
         recipe.content = form.content.data
         recipe.update()
         flash('Your recipe has been updated!',
-              'alert alert-success alert-dismissible fade show')
+            'alert alert-success alert-dismissible fade show')
         return redirect(url_for('recipe', recipe_id=recipe.recipe_id))
-    elif request.method == 'GET':
-        form.title.data = recipe.title
-        form.content.data = recipe.content
     return render_template('create_recipe.html', title='Update Recipe',
                            form=form, legend='Update Recipe')
 
