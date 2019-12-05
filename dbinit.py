@@ -1,7 +1,7 @@
 import os
 import sys
 import psycopg2 as dbapi2
-from ucuzpisir.tables import User_image, Recipe_image
+from ucuzpisir.tables import UserImage, RecipeImage
 
 INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS USER_IMAGES(
@@ -36,7 +36,7 @@ INIT_STATEMENTS = [
         CONTENT TEXT NOT NULL,
         DATE_POSTED DATE DEFAULT CURRENT_DATE,
         IMG_ID INTEGER REFERENCES RECIPE_IMAGES(IMG_ID) ON DELETE SET DEFAULT DEFAULT 1,
-        AUTHOR_ID INTEGER REFERENCES USERS(USER_ID) 
+        AUTHOR_ID INTEGER REFERENCES USERS(USER_ID)
     )
     """,
     """CREATE TABLE IF NOT EXISTS INGREDIENTS(
@@ -65,21 +65,19 @@ def initialize(url):
         for statement in INIT_STATEMENTS:
             cursor.execute(statement)
         cursor.close()
-    insertDefaultImages(url)
+    insert_default_images(url)
 
 
-def insertDefaultImages(url):
+def insert_default_images(url):
     with open('ucuzpisir/static/imgs/default_user.jpg', 'rb') as f:
-        imageData = f
-        defaultImage = User_image(url=url, filename='default', extension='jpeg',
-                                  img_data=imageData)
-        defaultImage.create()
+        image_data = f
+        default_image = UserImage(url=url, filename='default', extension='jpeg', img_data=image_data)
+        default_image.create()
 
     with open('ucuzpisir/static/imgs/default_recipe.jpg', 'rb') as f:
-        imageData = f
-        defaultImage = Recipe_image(url=url, filename='default', extension='jpeg',
-                                    img_data=imageData)
-        defaultImage.create()
+        image_data = f
+        default_image = RecipeImage(url=url, filename='default', extension='jpeg', img_data=image_data)
+        default_image.create()
 
 
 if __name__ == "__main__":

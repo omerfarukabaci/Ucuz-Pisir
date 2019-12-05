@@ -37,11 +37,11 @@
                     <th scope="col" class="text-danger font-weight-bold w-25 text-center h5">Quantity</th>
                     <th scope="col" class="text-danger font-weight-bold w-25 text-center h5">Unit</th>
                 </tr>
-                {% for name in ingredientNames %}
+                {% for name in ingredient_names %}
                 <tr>
-                    <td class="text-center">{{ingredientNames[loop.index0]}}</td>
-                    <td class="text-center">{{ingredientDatas[loop.index0][2]}}</td>
-                    <td class="text-center">({{ingredientDatas[loop.index0][1]}})</td>
+                    <td class="text-center">{{ingredient_names[loop.index0]}}</td>
+                    <td class="text-center">{{ingredient_datas[loop.index0][2]}}</td>
+                    <td class="text-center">({{ingredient_datas[loop.index0][1]}})</td>
                 </tr>
                 {% endfor %}        
             </table>
