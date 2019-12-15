@@ -118,7 +118,7 @@ def account():
         form.name.data = current_user.name
         form.email.data = current_user.email
         form.birthdate.data = current_user.birthdate
-    image_path = url_for('get-user-image', img_id=current_user.img_id)
+    image_path = url_for('get_user_image', img_id=current_user.img_id)
     return render_template('account.html', title='Account',
                            image_path=image_path, form=form)
 
@@ -194,7 +194,7 @@ def recipe(recipe_id):
         flash(f"Recipe you are looking for doesn't exist, sorry :(", 'alert alert-danger alert-dismissible fade show')
         return redirect(url_for('home')), 404
 
-    image_path = url_for('get-recipe-image', img_id=recipe.img_id)
+    image_path = url_for('get_recipe_image', img_id=recipe.img_id)
     author = User().retrieve('*', "user_id = %s", (recipe.author_id,))[0]
     return render_template('recipe.html', title=recipe.title, recipe=recipe,
                            image_path=image_path, author_username=author.username,
